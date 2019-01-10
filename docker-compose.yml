@@ -10,7 +10,7 @@ services:
       - ./public_html/:/var/www/html/
   apache:
     build: './apache/'
-    container_name : aplikasi_peternakan
+#    container_name : aplikasi_peternakan
     depends_on:
       - php
       - mariadb
@@ -39,6 +39,8 @@ services:
       MYSQL_DATABASE: penjualan
     ports:
       - "3306:3306"
+    networks:
+      - backend
     volumes:
       - "./my.conf:/etc/mysql/conf.d/config-file.cnf"
       - "./data_mysql:/var/lib/mysql:rw"
