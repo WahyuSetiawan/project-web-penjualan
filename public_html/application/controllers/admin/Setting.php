@@ -5,10 +5,7 @@ class Setting extends CI_Controller {
 
 	public function index()
 	{
-		
+$this->blade->view('admin/setting/index');
 	}
 
 }
-
-/* End of file Setting.php */
-/* Location: ./application/controllers/admin/Setting.php */

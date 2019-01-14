@@ -6,14 +6,18 @@ class Kategori_produk extends CI_Controller {
 	public function index()
 	{
 		$data['kategori'] = $this->db->get('tbl_produk_kategori')->result();
-		$data['content'] = $this->load->view('admin/kategori_produk/index',$data,true);
-		$this->load->view('admin/template',$data);
+		// $data['content'] = $this->load->view('admin/kategori_produk/index',$data,true);
+		// $this->load->view('admin/template',$data);
+
+		$this->blade->view('admin/kategori_produk/index', $data);
 	}
 
 	public function tambah_produk()
 	{
-		$data['content'] = $this->load->view('admin/kategori_produk/tambah','',true);
-		$this->load->view('admin/template',$data);
+		// $data['content'] = $this->load->view('admin/kategori_produk/tambah','',true);
+		// $this->load->view('admin/template',$data);
+
+		$this->blade->view('admin/kategori_produk/tambah');
 	}
 
 	public function hapus($id)

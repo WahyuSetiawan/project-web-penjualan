@@ -48,7 +48,6 @@ class Order extends CI_Controller {
 	public function destroy_cart()
 	{
 		$this->cart->destroy();
-		
 	}
 
 	public function cart_checkout()
