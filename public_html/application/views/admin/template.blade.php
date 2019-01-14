@@ -25,7 +25,6 @@
     <link href="<?php echo base_url('assets/admin') ?>/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
     <!-- Vendor CSS-->
-    <link href="<?php echo base_url('assets/admin') ?>/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
     <link href="<?php echo base_url('assets/admin') ?>/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css"
         rel="stylesheet" media="all">
     <link href="<?php echo base_url('assets/admin') ?>/vendor/wow/animate.css" rel="stylesheet" media="all">
@@ -143,7 +142,6 @@
     <script src="<?php echo base_url('assets/admin') ?>/vendor/slick/slick.min.js">
     </script>
     <script src="<?php echo base_url('assets/admin') ?>/vendor/wow/wow.min.js"></script>
-    <script src="<?php echo base_url('assets/admin') ?>/vendor/animsition/animsition.min.js"></script>
     <script src="<?php echo base_url('assets/admin') ?>/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
     </script>
     <script src="<?php echo base_url('assets/admin') ?>/vendor/counter-up/jquery.waypoints.min.js"></script>

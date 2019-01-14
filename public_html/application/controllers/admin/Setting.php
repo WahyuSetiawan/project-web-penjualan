@@ -1,11 +1,12 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Setting extends CI_Controller {
+class Setting extends Admin
+{
 
-	public function index()
-	{
-$this->blade->view('admin/setting/index');
-	}
+    public function index()
+    {
+        $this->blade->view('admin/setting/index');
+    }
 
 }

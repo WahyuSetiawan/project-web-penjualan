@@ -6,8 +6,10 @@ class Home extends CI_Controller {
 	public function index()
 	{
 		if ($this->session->userdata('id_admin')) {
-			$data['content'] = $this->load->view('admin/home','',true);
-			$this->load->view('admin/template',$data);
+			// $data['content'] = $this->load->view('admin/home','',true);
+			// $this->load->view('admin/template',$data);
+
+			$this->blade->view('admin/home');
 		}else{
 			$this->load->view('admin/login');
 		}
