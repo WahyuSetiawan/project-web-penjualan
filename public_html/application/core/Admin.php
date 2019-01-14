@@ -11,5 +11,3 @@ class Admin extends MY_Controller {
     }
 
 }
-
-/* End of file MY_Admin.php */

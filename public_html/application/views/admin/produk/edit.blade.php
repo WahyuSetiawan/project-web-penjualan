@@ -1,6 +1,7 @@
 @extends('admin/template')
 
 @section("content")
+<div class="au-card recent-report">
 
 
 <div class="au-card-inner">
@@ -57,4 +58,6 @@
 	<button class="btn btn-primary waves-effect" value="ubah" name="ubah" type="submit">SUBMIT</button>
 	<?php form_close() ?>
 </div>
+</div>
+
 @endsection 

@@ -1,10 +1,8 @@
 @extends('admin/template')
 
 @section('content')
-<div class="au-card recent-report">
-
 <div class="au-card-inner">
-	<h3 class="title-5 m-b-35">Tambah Kategori Data Produk</h3>
+	<h3 class="title-5 m-b-35">Tambah Setting</h3>
 
 	<form action="<?php echo site_url('admin/kategori_produk/simpan') ?>" method="post">
 		<div class="form-group form-float">
@@ -16,6 +14,5 @@
 
 		<button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
 	</form>
-</div>
 </div>
 @endsection

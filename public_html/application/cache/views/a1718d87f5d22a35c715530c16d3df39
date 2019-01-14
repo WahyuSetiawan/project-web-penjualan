@@ -1,60 +1,88 @@
 <?php $__env->startSection('content'); ?>
-<div class="au-card-inner">
-  <h3 class="title-5 m-b-35">Data Produk</h3>
-  <div class="table-data__tool">
-    <div class="table-data__tool-left"></div>
-    <div class="table-data__tool-right">
+<div class="col-lg-12">
+  <div class="card">
+    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
 
-      <a href="<?php echo site_url('admin/produk/tambah_produk') ?>">
+      <div class="card-header">
+        <strong>Setting</strong> Website
+      </div>
+      <div class="card-body card-block">
+        <div class="row form-group">
+          <div class="col col-md-3">
+            <label for="text-input" class=" form-control-label">Nama Website</label>
+          </div>
+          <div class="col-12 col-md-9">
+            <input type="text" id="nama_website" name="setting[nama_website]" placeholder="Nama Website" class="form-control"
+              value="<?php echo e((isset($setting['nama_website']))? $setting['nama_website']: ""); ?>">
+            <small class="form-text text-muted">Nama Website</small>
+          </div>
+        </div>
 
-        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-          <i class="zmdi zmdi-plus"></i>Tambah Produk</button></a>
+        <div class="row form-group">
+          <div class="col col-md-3">
+            <label for="text-input" class=" form-control-label">Facebook</label>
+          </div>
+          <div class="col-12 col-md-9">
+            <input type="text" id="facebook" name="setting[facebook]" placeholder="Facebook" class="form-control" value="<?php echo e((isset($setting['facebook']))? $setting['facebook']: ""); ?>">
+            <small class="form-text text-muted">Facebook</small>
+          </div>
+        </div>
 
-    </div>
+
+        <div class="row form-group">
+          <div class="col col-md-3">
+            <label for="text-input" class=" form-control-label">Instagram</label>
+          </div>
+          <div class="col-12 col-md-9">
+            <input type="text" id="instagram" name="setting[instagram]" placeholder="Instagram" class="form-control"
+              value="<?php echo e((isset($setting['instagram']))? $setting['instagram']: ""); ?>">
+            <small class="form-text text-muted">Instagram</small>
+          </div>
+        </div>
+
+
+        <div class="row form-group">
+          <div class="col col-md-3">
+            <label for="text-input" class=" form-control-label">No Telepon</label>
+          </div>
+          <div class="col-12 col-md-9">
+            <input type="text" id="no_telepon" name="setting[no_telepon]" placeholder="No Telepon" class="form-control"
+              value="<?php echo e((isset($setting['no_telepon']))? $setting['no_telepon']: ""); ?>">
+            <small class="form-text text-muted">No Telepon</small>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col col-md-3">
+            <label for="text-input" class=" form-control-label">Alamat</label>
+          </div>
+          <div class="col-12 col-md-9">
+            <input type="text" id="alamat" name="setting[alamat]" placeholder="Alamat" class="form-control" 
+            value="<?php echo e((isset($setting['alamat']))? $setting['alamat']: ""); ?>">
+            <small class="form-text text-muted">Nama Website</small>
+          </div>
+        </div>
+
+      </div>
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary btn-sm" name="set">
+          <i class="fa fa-dot-circle-o"></i> Submit
+        </button>
+        <button type="reset" class="btn btn-danger btn-sm">
+          <i class="fa fa-ban"></i> Reset
+        </button>
+      </div>
   </div>
-  <div class="table-responsive table-responsive-data2">
-    <table id="example4" class="display" style="width:100%">
-      <thead>
-        <tr>
-          <th>Nama Produk</th>
-          <th>Kategori</th>
-          <th>Harga Produk</th>
-          <th>Stok Produk</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php foreach ($produk as $row): ?>
-        <tr>
-          <td>
-            <?php echo $row->nama_produk ?>
-          </td>
-          <td>
-            <?php echo $row->nama_kategori ?>
-          </td>
-          <td>
-            <?php echo $row->harga_produk ?>
-          </td>
-          <td>
-            <?php echo $row->stok_produk ?>
-          </td>
-          <td>
-            <a href="<?php echo site_url('admin/produk/edit/'.$row->id_produk) ?>"><button class="btn btn-info btn-sm">Edit</button></a>
-            <a href="<?php echo site_url('admin/produk/hapus/'.$row->id_produk) ?>" onclick="return confirm('Anda Yakin Ingin Menghapus ?')"><button
-                class="btn btn-danger btn-sm">Hapus</button></a>
 
-          </td>
-        </tr>
-        <?php endforeach ?>
-
-      </tbody>
-    </table>
-  </div>
-  <!-- END DATA TABLE -->
+</form>
 </div>
+
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('js'); ?>
-    
-<?php $__env->stopSection(); ?>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#setting-table').DataTable();
+  });
+  <?php $__env->stopSection(); ?>
 <?php echo $__env->make('admin/template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

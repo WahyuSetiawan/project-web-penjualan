@@ -106,13 +106,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="au-card recent-report">
-                                    @yield('content')
-
-                                    <?php //if (isset($content)) { echo $content;} ?>
-
-
-                                </div>
+                                @yield('content')
                             </div>
                         </div>
                         <div class="row">

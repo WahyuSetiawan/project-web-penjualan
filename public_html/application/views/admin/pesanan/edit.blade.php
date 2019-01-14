@@ -4,6 +4,8 @@
 @section('content')
 	
 @endsection
+<div class="au-card recent-report">
+
 <div class="au-card-inner">
 	<h3 class="title-5 m-b-35">Data Pesanan</h3>
 	<div class="table-data__tool">
@@ -65,6 +67,7 @@
 
 
 	</div>
+</div>
 </div>
 @endsection
 

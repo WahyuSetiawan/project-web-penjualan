@@ -1,6 +1,8 @@
 @extends('admin/template')
 
 @section("content")
+<div class="au-card recent-report">
+
 <div class="au-card-inner">
 	<h3 class="title-5 m-b-35">Tambah Data Produk</h3>
 	<?php echo form_open_multipart('admin/produk/simpan', ['id'=>'form_validation'] ,['method'=>'post'])?>
@@ -71,6 +73,7 @@
 
 <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
 <?php form_close() ?>
+</div>
 </div>
 
 @endsection

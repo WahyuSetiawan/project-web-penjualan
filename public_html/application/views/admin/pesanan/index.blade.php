@@ -1,6 +1,8 @@
 @extends('admin/template')
 
 @section("content")
+<div class="au-card recent-report">
+
 <div class="au-card-inner">
   <h3 class="title-5 m-b-35">Data Pesanan</h3>
   <div class="table-data__tool">
@@ -57,6 +59,7 @@
 
   </div>
   <!-- END DATA TABLE -->
+</div>
 </div>
 @endsection
 
