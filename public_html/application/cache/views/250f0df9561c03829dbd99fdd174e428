@@ -1,5 +1,5 @@
 <ul class="list-unstyled navbar__list">
-    <li class="active has-sub">
+    <li class="has-sub">
         <a href="<?php echo site_url('admin/home') ?>">
             <i class="fas fa-tachometer-alt"></i>Dashboard
         </a>

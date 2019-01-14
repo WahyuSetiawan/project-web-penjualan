@@ -10,15 +10,8 @@ class Setting extends Admin
                 $this->settingModel->update($val, $setting);
             }
         }
-        $data = $this->settingModel->get();
-
-        foreach ($data as $key => $value) {
-            $this->data['setting'][$value->setting] = $value->value;
-        }
-
 
         $this->blade->view('admin/setting/index', $this->data);
-
     }
 
 }

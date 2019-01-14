@@ -44,6 +44,9 @@
 
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+    <meta name="base_url_controller" content="<?php echo e(current_url()); ?>">
+    <meta name="base_url" content="<?php echo e(base_url()); ?>">
 </head>
 
 <body class="animsition">
@@ -150,6 +153,15 @@
     <!-- Main JS-->
     <script src="<?php echo base_url('assets/admin') ?>/js/main.js"></script>
     <script src="<?php echo base_url('assets/admin') ?>/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var a = ".navbar__list .has-sub a[href='" + $("meta[name='base_url_controller']").attr(
+                'content').replace("index.php/", '') + "']";
+
+            $(a).parents(".has-sub").addClass('active');
+        });
+    </script>
 
 
     <?php echo $__env->yieldContent('js'); ?>

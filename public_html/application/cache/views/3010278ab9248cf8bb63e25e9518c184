@@ -1,6 +1,7 @@
 
 
 <?php $__env->startSection("content"); ?>
+<div class="au-card recent-report">
 
 
 <div class="au-card-inner">
@@ -57,5 +58,7 @@
 	<button class="btn btn-primary waves-effect" value="ubah" name="ubah" type="submit">SUBMIT</button>
 	<?php form_close() ?>
 </div>
+</div>
+
 <?php $__env->stopSection(); ?> 
 <?php echo $__env->make('admin/template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
