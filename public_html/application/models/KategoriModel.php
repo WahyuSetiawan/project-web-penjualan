@@ -29,14 +29,14 @@ class KategoriModel extends CI_Model
 
     public function put($id, $data)
     {
-        $this->db->where("id", $id);
+        $this->db->where("id_kategori", $id);
         return $this->db->update(self::$table, $data);
 
     }
 
     public function del($id)
     {
-        $this->db->where("id", $id);
+        $this->db->where("id_kategori", $id);
         return $this->db->delete(self::$table);
     }
 

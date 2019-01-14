@@ -133,4 +133,10 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('settingModel', 'produkModel', 'kategoriModel');
+$autoload['model'] = array(
+    'settingModel', 
+    'produkModel', 
+    'kategoriModel',
+    'supplierModel',
+    'pembelianModel'
+);

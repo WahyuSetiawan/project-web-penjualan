@@ -12,27 +12,20 @@ class Produk extends CI_Controller
 
     public function index()
     {
-        $data['produk'] = $this->db
-            ->select('*,tbl_produk_kategori.nama_kategori')
-            ->join('tbl_produk_kategori', 'tbl_produk.id_kategori=tbl_produk_kategori.id_kategori')
-            ->get('tbl_produk')->result();
+        $this->data['produk'] = $this->produkModel->get();
 
-        $this->blade->view('admin/produk/index', $data);
+        $this->blade->view('admin/produk/index', $this->data);
     }
 
     public function tambah_produk()
     {
-        $data['kategori'] = $this->kategoriModel->get();
-
-        $this->blade->view('admin/produk/tambah_produk');
+        $this->data['kategori'] = $this->kategoriModel->get();
+        
+        $this->blade->view('admin/produk/tambah_produk', $this->data);
     }
 
     public function edit($id_produk)
     {
-        // $this->data['produk'] = $this->db->select('*,tbl_produk_kategori.nama_kategori')
-        //     ->join('tbl_produk_kategori', 'tbl_produk.id_kategori=tbl_produk_kategori.id_kategori')
-        //     ->where('id_produk', $id_produk)
-        //     ->get('tbl_produk')->result();
         $this->data['produk'] = $this->produkModel->get($id_produk);
         $this->data['kategori'] = $this->kategoriModel->get();
 

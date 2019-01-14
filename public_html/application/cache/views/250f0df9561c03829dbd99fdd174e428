@@ -5,6 +5,18 @@
         </a>
     </li>
     <li class="has-sub">
+        <a href="<?php echo site_url('admin/supplier') ?>">
+            <i class="fas fa-cart-plus"></i>Supplier
+        </a>
+    </li>
+
+    <li class="has-sub">
+        <a href="<?php echo site_url('admin/pembelian') ?>">
+            <i class="fas fa-cart-plus"></i>Pembelian
+        </a>
+    </li>
+
+    <li class="has-sub">
         <a href="<?php echo site_url('admin/produk') ?>">
             <i class="fas fa-box"></i>Produk
         </a>

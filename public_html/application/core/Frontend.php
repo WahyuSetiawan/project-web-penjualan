@@ -14,6 +14,7 @@ class Frontend extends MY_Controller
         
         $this->data['head']['kategori'] = $this->kategoriModel->get();
         $this->data['head']['cart'] = $this->cart;
+        $this->data['flashdata'] = $this->session;
     }
     
 
