@@ -1,0 +1,10 @@
+
+        v 1.0.2.dev:
+            - Fix force close android pie
+            - Memperbaharui animasi masuk dan keluar search
+            - Memperbaiki bottom space di beberapa page android
+            - Memperbaiki bila mana scroll telah mencapat akhir dan awal scroll tidak menampilkan data
+            - Memperbaiki search activity bila mana telah melakukan scroll dan mencari dengan query baru lagi tidak bisa melakukan 
+              pagination
+        v 1.0.0 :
+            - beta
