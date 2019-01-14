@@ -1,6 +1,4 @@
-@extends('admin/template')
-
-@section("content")
+<?php $__env->startSection("content"); ?>
 <div class="au-card recent-report">
 
 
@@ -18,7 +16,7 @@
             </div>
         </div>
 
-        @include('admin.message', ['flashdata' => $flashdata])
+        <?php echo $__env->make('admin.message', ['flashdata' => $flashdata], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
         <div class="table-responsive table-responsive-data2">
             <table id="example4" class="display" style="width:100%">
@@ -70,12 +68,13 @@
     </div>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
+<?php $__env->startSection('js'); ?>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#example4').DataTable();
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin/template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

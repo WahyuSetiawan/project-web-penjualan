@@ -6,20 +6,26 @@ class PembelianModel extends CI_Model
 {
     public static $table = "tbl_pembelian";
 
-    public function select()
+    public function select($params = [])
     {
+        $this->db->select(self::$table . ".*, " .
+            ProdukModel::$table . ".nama_produk as nama_produk, " .
+            SupplierModel::$table . ".nama as nama_supplier");
+
         $this->db->join(ProdukModel::$table, ProdukModel::$table . '.id_produk = ' . self::$table . '.id_produk', 'left');
         $this->db->join(SupplierModel::$table, SupplierModel::$table . '.id_supplier = ' . self::$table . '.id_supplier', 'left');
     }
 
     public function get($id = false, $limit = false, $offset = false, $params = [])
     {
+        $this->select($params);
+
         if ($id) {
             $this->db->where(self::$table . ".id_pembelian", $id);
         }
 
         if ($id) {
-            return $this->db->get(self::$table)->result();
+            return $this->db->get(self::$table)->row();
         } else {
             return $this->db->get(self::$table, $limit, $offset)->result();
         }

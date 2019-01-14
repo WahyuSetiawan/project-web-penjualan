@@ -1,11 +1,11 @@
 <?php
 
+defined('BASEPATH') or exit('No direct script access allowed');
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+class Pembelian extends Admin
+{
 
-class Pembelian extends CI_Controller {
-
-public function index()
+    public function index()
     {
         $this->data['pembelian'] = $this->pembelianModel->get();
 
@@ -14,6 +14,9 @@ public function index()
 
     public function add()
     {
+        $this->data['supplier'] = $this->supplierModel->get();
+        $this->data['produk'] = $this->produkModel->get();
+
         $this->blade->view('admin/pembelian/tambah', $this->data);
     }
 
@@ -25,9 +28,10 @@ public function index()
         if ($method !== null) {
             if ($method == "SET") {
                 $data = [
-                    'nama' => $this->input->post('nama'),
-                    'alamat' => $this->input->post('alamat'),
-                    'telepon' => $this->input->post('telepon'),
+                    'id_supplier' => $this->input->post('supplier'),
+                    'id_produk' => $this->input->post('produk'),
+                    'jumlah' => $this->input->post('jumlah'),
+                    'nominal' => $this->input->post('nominal'),
                 ];
 
                 $result = $this->pembelianModel->set($data);
@@ -45,6 +49,8 @@ public function index()
 
     public function edit($id)
     {
+        $this->data['supplier'] = $this->supplierModel->get();
+        $this->data['produk'] = $this->produkModel->get();
         $this->data['pembelian'] = $this->pembelianModel->get($id);
 
         $this->blade->view('admin/pembelian/tambah', $this->data);
@@ -58,9 +64,10 @@ public function index()
         if ($method !== null) {
             if ($method == "PUT") {
                 $data = [
-                    'nama' => $this->input->post('nama'),
-                    'alamat' => $this->input->post('alamat'),
-                    'telepon' => $this->input->post('telepon'),
+                    'id_supplier' => $this->input->post('supplier'),
+                    'id_produk' => $this->input->post('produk'),
+                    'jumlah' => $this->input->post('jumlah'),
+                    'nominal' => $this->input->post('nominal'),
                 ];
 
                 $result = $this->pembelianModel->put($id, $data);
