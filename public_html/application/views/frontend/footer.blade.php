@@ -105,13 +105,6 @@
 							@if (isset($head['setting']['rss']))
 							<a class="share-rss" href="#"><i class="fa fa-rss"></i></a>
 							@endif
-
-
-							{{-- <a class="share-google-plus" href="#"><i class="fa fa-google-plus"></i></a>
-							<a class="share-twitter" href="#"><i class="fa fa-twitter"></i></a>
-							<a class="share-pinterest" href="#"><i class="fa fa-pinterest"></i></a>
-							<a class="share-vimeo" href="#"><i class="fa fa-vimeo"></i></a>
-							<a class="share-rss" href="#"><i class="fa fa-rss"></i></a> --}}
 						</div>
 					</div>
 				</div>

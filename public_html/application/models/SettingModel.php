@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class SettingModel extends CI_Model
 {
-    public $table = "tbl_settings";
+    public static $table = "tbl_settings";
 
     public function select()
     {
@@ -17,12 +17,12 @@ class SettingModel extends CI_Model
             $this->db->where("setting", $id);
         }
 
-        return $this->db->get($this->table, $limit, $offset)->result();
+        return $this->db->get(self::$table, $limit, $offset)->result();
     }
 
     public function set($data)
     {
-        $this->db->insert($this->table,$data);
+        $this->db->insert(self::$table,$data);
 
         return $this->db->last_query();
     }
@@ -31,15 +31,15 @@ class SettingModel extends CI_Model
     {
         $this->db->where("setting", $setting);
 
-        $row = $this->db->get($this->table)->row();
+        $row = $this->db->get(self::$table)->row();
 
         if ($row == null) {
-            $this->db->insert($this->table,["setting" => $setting, "value" => $value]);
+            $this->db->insert(self::$table,["setting" => $setting, "value" => $value]);
 
         } else {
             $this->db->where("setting", $setting);
 
-            $this->db->update($this->table,["value" => $value]);
+            $this->db->update(self::$table,["value" => $value]);
         }
     }
 
@@ -47,7 +47,7 @@ class SettingModel extends CI_Model
     {
         $this->db->where("id", $id);
 
-        return $this->db->update($this->table,$data);
+        return $this->db->update(self::$table,$data);
     }
 
     public function del()

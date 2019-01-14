@@ -16,32 +16,27 @@ class Produk extends CI_Controller
             ->select('*,tbl_produk_kategori.nama_kategori')
             ->join('tbl_produk_kategori', 'tbl_produk.id_kategori=tbl_produk_kategori.id_kategori')
             ->get('tbl_produk')->result();
-        // $tmp['content'] = $this->load->view('admin/produk/index', $data, true);
-        // $this->load->view('admin/template', $tmp);
 
         $this->blade->view('admin/produk/index', $data);
     }
 
     public function tambah_produk()
     {
-        $data['kategori'] = $this->db->get('tbl_produk_kategori')->result();
-        // $tmp['content'] = $this->load->view('admin/produk/tambah_produk', $data, true);
-        // $this->load->view('admin/template', $tmp);
+        $data['kategori'] = $this->kategoriModel->get();
 
         $this->blade->view('admin/produk/tambah_produk');
     }
 
     public function edit($id_produk)
     {
-        $data['produk'] = $this->db->select('*,tbl_produk_kategori.nama_kategori')
-            ->join('tbl_produk_kategori', 'tbl_produk.id_kategori=tbl_produk_kategori.id_kategori')
-            ->where('id_produk', $id_produk)
-            ->get('tbl_produk')->result();
-        $data['kategori'] = $this->db->get('tbl_produk_kategori')->result();
-        // $tmp['content'] = $this->load->view('admin/produk/edit', $data, true);
-        // $this->load->view('admin/template', $tmp);
+        // $this->data['produk'] = $this->db->select('*,tbl_produk_kategori.nama_kategori')
+        //     ->join('tbl_produk_kategori', 'tbl_produk.id_kategori=tbl_produk_kategori.id_kategori')
+        //     ->where('id_produk', $id_produk)
+        //     ->get('tbl_produk')->result();
+        $this->data['produk'] = $this->produkModel->get($id_produk);
+        $this->data['kategori'] = $this->kategoriModel->get();
 
-        $this->blade->view('admin/produk/edit', $data);
+        $this->blade->view('admin/produk/edit', $this->data);
     }
 
     public function simpan()
