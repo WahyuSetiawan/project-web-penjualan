@@ -1,14 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Akun extends CI_Controller {
+class Akun extends Frontend {
 
 
 	public function index()
 	{
-		$data['user'] = $this->db->where('id_konsumen', $this->session->userdata('id_konsumen'))->get('tbl_konsumen')->result();
-		$tmp['content'] = $this->load->view('akun',$data, true);
-		$this->load->view('template', $tmp);
+		$this->data['user'] = $this->db->where('id_konsumen', $this->session->userdata('id_konsumen'))->get('tbl_konsumen')->result();
+		// $tmp['content'] = $this->load->view('akun',$data, true);
+		// $this->load->view('template', $tmp);
+
+		$this->blade->view('frontend/akun', $this->data);
 	}
 
 	public function daftar()
@@ -118,10 +120,11 @@ class Akun extends CI_Controller {
 
     public function invoice($id)
     {
-    	$data['detail_pesan'] = $this->db->where('id_pesanan', $id)->join('tbl_produk', 'tbl_detail_pesan.id_produk = tbl_produk.id_produk')->get('tbl_detail_pesan')->result();
-    	$data['pesanan'] = $this->db->where('id_pesanan', $id)->join('tbl_konsumen', 'tbl_pesanan.id_konsumen = tbl_konsumen.id_konsumen')->get('tbl_pesanan')->result();
+    	$this->data['detail_pesan'] = $this->db->where('id_pesanan', $id)->join('tbl_produk', 'tbl_detail_pesan.id_produk = tbl_produk.id_produk')->get('tbl_detail_pesan')->result();
+    	$this->data['pesanan'] = $this->db->where('id_pesanan', $id)->join('tbl_konsumen', 'tbl_pesanan.id_konsumen = tbl_konsumen.id_konsumen')->get('tbl_pesanan')->result();
 
-    	$this->load->view('invoice', $data);
+		// $this->load->view('invoice', $data);
+		$this->blade->view('frontend/invoice',$this->data);
     }
 
 }

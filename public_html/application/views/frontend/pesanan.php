@@ -1,38 +1,49 @@
-	<section id="testimonials" class="testimonial  bg-gray">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12">
+<section id="testimonials" class="testimonial  bg-gray">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12">
 
-					<h3>Detail Pesanan</h3>
-					
+				<h3>Detail Pesanan</h3>
 
-					<hr>
-					<table id="example" class="display" style="width:100%">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Pesanan</th>
-								<th>Tanggal Pesan</th>
-								<th>Nama Penerima</th>
-								<th>alamat Penerima</th>
-								<th>Total Bayar</th>
-								<th>Kurir Pengiriman</th>
-								<th>Total Ongkir</th>
-								<th> Status Konfirmasi Pesanan </th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php foreach ($pesanan as $r): ?>
-								<tr>
-									<td>#IDPESANAN00P<?php echo $r->id_pesanan ?></td>
-									<td><?php echo $r->status_pesanan ?></td>
-									<td><?php echo $r->tanggal_pesan ?></td>
-									<td><?php echo $r->nama_penerima ?></td>
-									<td><?php echo $r->alamat.', '.$r->provinsi_penerima.', '.$r->kota_penerima.'<br>'. $r->kode_pos ?></td>
-									<td>Rp. <?php echo number_format($r->total_bayar) ?></td>
-									<td>
-										<?php echo $r->kurir ?> - 
-										<?php 
+				<hr>
+				<table id="example" class="display" style="width:100%">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Pesanan</th>
+							<th>Tanggal Pesan</th>
+							<th>Nama Penerima</th>
+							<th>alamat Penerima</th>
+							<th>Total Bayar</th>
+							<th>Kurir Pengiriman</th>
+							<th>Total Ongkir</th>
+							<th> Status Konfirmasi Pesanan </th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ($pesanan as $r): ?>
+						<tr>
+							<td>#IDPESANAN00P
+								<?php echo $r->id_pesanan ?>
+							</td>
+							<td>
+								<?php echo $r->status_pesanan ?>
+							</td>
+							<td>
+								<?php echo $r->tanggal_pesan ?>
+							</td>
+							<td>
+								<?php echo $r->nama_penerima ?>
+							</td>
+							<td>
+								<?php echo $r->alamat.', '.$r->provinsi_penerima.', '.$r->kota_penerima.'<br>'. $r->kode_pos ?>
+							</td>
+							<td>Rp.
+								<?php echo number_format($r->total_bayar) ?>
+							</td>
+							<td>
+								<?php echo $r->kurir ?> -
+								<?php 
 										if ($r->resi_pengiriman!=null) {
 											echo $r->resi_pengiriman;
 										}else{
@@ -40,10 +51,12 @@
 										}
 										?>
 
-									</td>
-									<td>Rp. <?php echo number_format($r->jumlah_ongkir) ?></td>
-									<td>
-										<?php 
+							</td>
+							<td>Rp.
+								<?php echo number_format($r->jumlah_ongkir) ?>
+							</td>
+							<td>
+								<?php 
 										switch ($r->status_pesanan) {
 											case 'Dikonfirmasi':
 											echo "<button type='button' class='btn btn-info btn-block btn-sm'>Sudah Dikonfirmasi Admin</button>";
@@ -52,28 +65,29 @@
 											default:
 											?>
 
-											<?php echo form_open_multipart('akun/konfirmasi/'.$r->id_pesanan, ['id'=>'form_validation'] ,['method'=>'post'])?>
-											<input type="file" name="pic" class="form-control" required="" value="BUkti Transfer">
-											<button type='submit' class='btn btn-danger btn-block btn-sm'>Konfirmasi Pesanan</button>
-											<?php form_close() ?>
+								<?php echo form_open_multipart('akun/konfirmasi/'.$r->id_pesanan, ['id'=>'form_validation'] ,['method'=>'post'])?>
+								<input type="file" name="pic" class="form-control" required="" value="BUkti Transfer">
+								<button type='submit' class='btn btn-danger btn-block btn-sm'>Konfirmasi Pesanan</button>
+								<?php form_close() ?>
 
 
 
-											<?php 
+								<?php 
 											break;
 										}
 										?>
-										<a href="<?php echo site_url('akun/invoice/'.$r->id_pesanan) ?>"  target="_blank"><button type="button" class="btn btn-success btn-block btn-sm" style="margin-top: 5px;">Detail Pesan</button></a>
-									</td>
-									
-								</tr>
-							<?php endforeach ?>
-						</tbody>
-					</table>
-					<hr>
-					<b>*<small>Untuk Pembatalan Pesanan, Silahkan Melakukan Menghubungi CS Kami</small></b>
-				</div>
+								<a href="<?php echo site_url('akun/invoice/'.$r->id_pesanan) ?>" target="_blank"><button type="button" class="btn btn-success btn-block btn-sm"
+									 style="margin-top: 5px;">Detail Pesan</button></a>
+							</td>
 
+						</tr>
+						<?php endforeach ?>
+					</tbody>
+				</table>
+				<hr>
+				<b>*<small>Untuk Pembatalan Pesanan, Silahkan Melakukan Menghubungi CS Kami</small></b>
 			</div>
+
 		</div>
-	</section>
+	</div>
+</section>

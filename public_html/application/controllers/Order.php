@@ -1,14 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Order extends CI_Controller {
+class Order extends Frontend {
 
 	public function index()
 	{
-		$data['bank'] = $this->db->get('tbl_bank_pembayaran')->result();
+		$this->data['bank'] = $this->db->get('tbl_bank_pembayaran')->result();
 
-		$tmp['content'] = $this->load->view('keranjang',$data , true);
-		$this->load->view('template', $tmp);
+		// $tmp['content'] = $this->load->view('keranjang',$data , true);
+		// $this->load->view('template', $tmp);
+
+		$this->blade->view('frontend/keranjang', $this->data);
 	}
 
 	public function add_keranjang()
@@ -87,7 +89,6 @@ class Order extends CI_Controller {
 		}
 		$this->cart->destroy();
 		redirect(site_url('akun/pesanan'),'refresh');
-
 	}
 
 }

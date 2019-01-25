@@ -1,4 +1,6 @@
+@extends('frontend/template', $head)
 
+@section('content')
 <section id="page-title" class="page-title shop shop-single" style="padding-bottom: 0px;">
 	<div class="container shop-content">
 		<div class="row">
@@ -26,7 +28,7 @@
 
 						<tbody>
 
-							<?php foreach ($this->cart->contents() as $items) { ?>
+							<?php foreach ($head['cart']->contents() as $items) { ?>
 								<tr class="cart-product">
 									<td class="cart-product-item"><div class="cart-product-remove">
 										<a href="<?php echo site_url('order/cancel_cart/'.$items['rowid']) ?>"><i class="fa fa-close"></i></a>
@@ -52,7 +54,7 @@
 									<div class="row clearfix">
 										<!-- .col-md-6 end -->
 
-										<?php if (!$this->session->userdata('id_konsumen')) 
+										<?php if (!$head['session']->userdata('id_konsumen')) 
 										{ ?>
 											<div class="col-xs-12 col-sm-6 col-md-6 text-right">
 												<button type="button" class="btn btn-primary text-center btn-sm" data-toggle="modal" data-target=".login-modal-lg">Proses Checkout</button>
@@ -71,7 +73,7 @@
 		</div>
 	</section>
 
-	<?php if ($this->session->userdata('id_konsumen')) { ?>
+	<?php if ($head['session']->userdata('id_konsumen')) { ?>
 
 		<section id="page-title" class="page-title shop shop-single" style="padding-bottom: 0px;">
 			<div class="container shop-content">
@@ -90,7 +92,7 @@
 								<div>
 									<h6 class="my-0">Total Pesanan</h6>
 								</div>
-								<span class="text-muted">Rp. <?php echo number_format($this->cart->total()); ?></span>
+								<span class="text-muted">Rp. <?php echo number_format($head['cart']->total()); ?></span>
 							</li>
 							<li class="list-group-item d-flex justify-content-between lh-condensed">
 								<div>
@@ -102,7 +104,7 @@
 
 							<li class="list-group-item d-flex justify-content-between">
 								<span>Total Pembayaran</span>
-								<b>Rp. <strong style="color: black" class="tot-bayar"><?php echo number_format($this->cart->total()); ?> </strong></b>
+								<b>Rp. <strong style="color: black" class="tot-bayar"><?php echo number_format($head['cart']->total()); ?> </strong></b>
 							</li>
 <!-- 							<li class="list-group-item d-flex justify-content-between">
 								<form class="form-inline">
@@ -275,7 +277,7 @@
 					
 
 
-					var a = "<?php echo $this->cart->total(); ?>";
+					var a = "<?php echo $head['cart']->total(); ?>";
 					var jumlah = parseInt(ong)+parseInt(a);
 
 					var	number_string = jumlah.toString(),
@@ -296,3 +298,5 @@
 		</script>
 
 	<?php } ?>
+
+	@endsection

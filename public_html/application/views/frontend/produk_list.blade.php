@@ -1,3 +1,7 @@
+@extends('frontend/template', $head)
+
+@section('content')
+	
 	<section id="shopgrid" class="shop shop-grid">
 		<div class="container">
 			<div class="row">
@@ -136,3 +140,5 @@
 			<!-- .container end -->
 		</section>
 	<!-- #blog end -->
+
+	@endsection

@@ -42,8 +42,8 @@
 
     <!-- data tabel -->
 
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    {{-- <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script> --}}
 
     <meta name="base_url_controller" content="{{ current_url() }}">
     <meta name="base_url" content="{{ base_url() }}">
@@ -131,7 +131,7 @@
 
 
     <!-- Jquery JS-->
-    <!-- <script src="<?php echo base_url('assets/admin') ?>/vendor/jquery-3.2.1.min.js"></script> -->
+    <script src="<?php echo base_url('assets/admin') ?>/vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
     <script src="<?php echo base_url('assets/admin') ?>/vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="<?php echo base_url('assets/admin') ?>/vendor/bootstrap-4.1/bootstrap.min.js"></script>

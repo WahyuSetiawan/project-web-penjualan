@@ -20,7 +20,7 @@ class Produk extends CI_Controller
     public function tambah_produk()
     {
         $this->data['kategori'] = $this->kategoriModel->get();
-        
+
         $this->blade->view('admin/produk/tambah_produk', $this->data);
     }
 
@@ -50,6 +50,7 @@ class Produk extends CI_Controller
             'id_kategori' => $this->input->post('kategori'),
 
         );
+
         $this->db->insert('tbl_produk', $data_produk);
         $id = $this->db->insert_id();
 
@@ -57,21 +58,26 @@ class Produk extends CI_Controller
             $angka = 1;
             for ($i = 0; $i < $filesCount; $i++) {
                 $nmfile = "file_" . time() . $i . ".jpg";
-                $config['upload_path'] = './uploads/'; //path folder
-                $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
-                $config['max_size'] = '2048'; //maksimum besar file 2M
-                $config['max_width'] = '3000'; //lebar maksimum 1288 px
-                $config['max_height'] = '3000'; //tinggi maksimu 768 px
-                $config['file_name'] = $nmfile; //nama yang terupload nantinya
-                $config['create_thumb'] = false;
-                $config['maintain_ratio'] = false;
-                $_FILES['userFile']['name'] = $files['userFile']['name'][$i];
-                $_FILES['userFile']['type'] = $files['userFile']['type'][$i];
-                $_FILES['userFile']['tmp_name'] = $files['userFile']['tmp_name'][$i];
-                $_FILES['userFile']['error'] = $files['userFile']['error'][$i];
-                $_FILES['userFile']['size'] = $files['userFile']['size'][$i];
-                $this->upload->initialize($config);
-                if ($this->upload->do_upload('userFile')) {
+                
+                // $config['upload_path'] = './uploads/'; //path folder
+                // $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
+                // $config['max_size'] = '2048'; //maksimum besar file 2M
+                // $config['max_width'] = '3000'; //lebar maksimum 1288 px
+                // $config['max_height'] = '3000'; //tinggi maksimu 768 px
+                // $config['file_name'] = $nmfile; //nama yang terupload nantinya
+                // $config['create_thumb'] = false;
+                // $config['maintain_ratio'] = false;
+
+                // $_FILES['userFile']['name'] = $files['userFile']['name'][$i];
+                // $_FILES['userFile']['type'] = $files['userFile']['type'][$i];
+                // $_FILES['userFile']['tmp_name'] = $files['userFile']['tmp_name'][$i];
+                // $_FILES['userFile']['error'] = $files['userFile']['error'][$i];
+                // $_FILES['userFile']['size'] = $files['userFile']['size'][$i];
+
+                // $this->upload->initialize($config);
+                // if ($this->upload->do_upload('userFile')) {
+
+                if ($this->upload($nmfile)) {
                     $url = $this->upload->data();
                     $angka_nomer = $i + $angka;
                     $query = "update tbl_produk set gambar_" . $angka_nomer . "='uploads/" . $nmfile . "' where id_produk=$id";
@@ -97,15 +103,17 @@ class Produk extends CI_Controller
     {
         $this->load->library('upload');
         $nmfile = "file_" . time();
-        $config['upload_path'] = './uploads/'; //path folder
-        $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
-        $config['max_size'] = '2048'; //maksimum besar file 2M
-        $config['max_width'] = '3000'; //lebar maksimum 1288 px
-        $config['max_height'] = '3000'; //tinggi maksimu 768 px
-        $config['file_name'] = $nmfile; //nama yang terupload nantinya
-        $this->upload->initialize($config);
 
-        if ($this->upload->do_upload('userFile')) {
+        // $config['upload_path'] = './uploads/'; //path folder
+        // $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
+        // $config['max_size'] = '2048'; //maksimum besar file 2M
+        // $config['max_width'] = '3000'; //lebar maksimum 1288 px
+        // $config['max_height'] = '3000'; //tinggi maksimu 768 px
+        // $config['file_name'] = $nmfile; //nama yang terupload nantinya
+        // $this->upload->initialize($config);
+
+        // if ($this->upload->do_upload('userFile')) {
+        if ($this->upload($nmfile)) {
             $url = $this->upload->data();
             $data_produk = array(
                 'nama_produk' => $this->input->post('nama'),
