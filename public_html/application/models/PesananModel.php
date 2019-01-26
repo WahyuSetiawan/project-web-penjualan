@@ -38,7 +38,7 @@ class PesananModel extends CI_Model
 
     public function put($id, $data)
     {
-        $this->db->where("id_pesanan" . $id);
+        $this->db->where("id_pesanan" , $id);
         return $this->db->update(self::$table, $data);
     }
 

@@ -1,5 +1,4 @@
-@extends('admin/template')
-
+@extends('admin/template') 
 @section("content")
 <div class="au-card recent-report">
 
@@ -36,7 +35,7 @@
             <td>Rp. {{ number_format($r->total_bayar) }} </td>
             <td>
               <?php if ($r->status_pesanan == 'Konfirmasi' || $r->status_pesanan=='Dikonfirmasi') { ?>
-              <a href="{{base_url('/'.$r->bukti_transfer)}}" target="_blank">Bukti Trasnfer</a>
+              <a href="{{base_url('/'.$r->bukti_transfer)}}" target="_blank">Bukti Transfer</a>
               <?php }else{ ?>
               <span>Belum Ada resi</span>
               <?php } ?>
@@ -44,15 +43,13 @@
             </td>
 
             <td>
-              <?php echo form_open_multipart('admin/pesanan/proses/'.$r->id_pesanan, ['id'=>'form_validation'] ,['method'=>'post'])?>
-              <input type="text" name="resi" class="form-control" required="" placeholder="Resi Pengiriman" value="<?php echo $r->resi_pengiriman ?>">
-              <button type='submit' class='btn btn-danger btn-sm'>Proses Pesanan</button>
-              <?php form_close() ?>
-              <a href="<?php echo site_url('admin/pesanan/invoice/'.$r->id_pesanan) ?>" target="_blank"><button type="button"
+              <form action="{{site_url('admin/pesanan/proses/'.$r->id_pesanan)}}" method="POST" id="form_validation">   
+                <input type="text" name="resi" class="form-control" required="" placeholder="Resi Pengiriman" value="{{ $r->resi_pengiriman }}">
+                <button type='submit' class='btn btn-danger btn-sm'>Proses Pesanan</button>
+              </form>
+              <a href="{{ site_url('admin/pesanan/invoice/'.$r->id_pesanan) }}" target="_blank"><button type="button"
                   class="btn btn-success btn-block btn-sm" style="margin-top: 5px;">Detail Pesan</button></a>
             </td>
-
-
           </tr>
           <?php endforeach ?>
         </tbody>
@@ -63,12 +60,12 @@
   </div>
 </div>
 @endsection
-
-
+ 
 @section('js')
 <script type="text/javascript">
   $(document).ready(function () {
     $('#example4').DataTable();
   });
+
 </script>
 @endsection

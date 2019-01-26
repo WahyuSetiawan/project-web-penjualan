@@ -16,8 +16,8 @@ class Pesanan extends CI_Controller
         // $this->db->where('id_pesanan', $id)->update('tbl_pesanan', array('resi_pengiriman' => $this->input->post('resi'), 'status_pesanan' => 'Dikonfirmasi'));
 
         $data = [
-			'resi_pengiriman' => $this->input->post('resi'), 
-			'status_pesanan' => 'Dikonfirmasi'
+            'resi_pengiriman' => $this->input->post('resi'),
+            'status_pesanan' => 'Dikonfirmasi',
         ];
 
         $this->pesananModel->put($id, $data);
@@ -38,31 +38,34 @@ class Pesanan extends CI_Controller
         $this->detailPesanModel->del($id);
         $this->pesananModel->del($id);
 
-        // $this->db->where('id_pesanan', $id);
-        // $this->db->delete('tbl_detail_pesan');
-
-        // $this->db->where('id_pesanan', $id);
-        // $this->db->delete('tbl_pesanan');
-
         redirect('admin/pesanan', 'refresh');
     }
 
     public function edit($id)
     {
-        $data['detail_pesan'] = $this->db->where('id_pesanan', $id)->join('tbl_produk', 'tbl_detail_pesan.id_produk = tbl_produk.id_produk')->get('tbl_detail_pesan')->result();
-        $data['produk'] = $this->db->get('tbl_produk')->result();
-        $data['pesanan'] = $this->db->where('id_pesanan', $id)->join('tbl_konsumen', 'tbl_pesanan.id_konsumen = tbl_konsumen.id_konsumen')->get('tbl_pesanan')->result();
+        $this->data['detail_pesan'] = $this->detailPesanModel->get(false, false, false, ['id_pesanan' => $id]);
+        $this->data['produk'] = $this->produkModel->get();
+        $this->data['pesanan'] = $this->pesananModel->get(false, false, $id);
 
-        $this->blade->view("admin/pesanan/edit", $data);
+        $this->blade->view("admin/pesanan/edit", $this->data);
     }
 
     public function ubah($id)
     {
-        $this->db->insert('tbl_detail_pesan', array('id_produk' => $this->input->post('id_produk'), 'qty' => $this->input->post('qty'), 'id_pesanan' => $id));
-        redirect('admin/pesanan/edit/' . $id, 'refresh');
+        $data = [
+            'id_produk' => $this->input->post('id_produk'),
+            'qty' => $this->input->post('qty'),
+            'id_pesanan' => $id
+        ];
 
+        // $this->db->insert('tbl_detail_pesan', array('id_produk' => $this->input->post('id_produk'), 'qty' => $this->input->post('qty'), 'id_pesanan' => $id));
+
+        $this->pesananModel->set($data);
+
+        redirect('admin/pesanan/edit/' . $id, 'refresh');
     }
 }
 
 /* End of file Pesanan.php */
 /* Location: ./application/controllers/admin/Pesanan.php */
+ 

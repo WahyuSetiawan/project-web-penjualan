@@ -6,8 +6,7 @@ class Akun extends Frontend
 
     public function index()
     {
-		// $this->data['user'] = $this->db->where('id_konsumen', $this->session->userdata('id_konsumen'))->get('tbl_konsumen')->result();
-		$this->data['user'] = $this->konsumenModel->get(false, false, $this->session->userdata('id_konsumen'));
+        $this->data['user'] = $this->konsumenModel->get(false, false, $this->session->userdata('id_konsumen'));
 
         $this->blade->view('frontend/akun', $this->data);
     }
@@ -20,9 +19,9 @@ class Akun extends Frontend
             'password_konsumen' => md5($this->input->post('password')),
             'no_hp_konsumen' => $this->input->post('nohp'),
         );
-		
-		$this->kosumenModel->put($data);
-		
+
+        $this->kosumenModel->put($data);
+
         $data_session = array(
             'email_konsumen' => $this->input->post('email'),
             'nama_konsumen' => $this->input->post('namalengkap'),
@@ -51,7 +50,8 @@ class Akun extends Frontend
                 'no_hp_konsumen' => $this->input->post('nohp'),
             );
         }
-        $this->db->where('id_konsumen', $this->session->userdata('id_konsumen'))->update('tbl_konsumen', $data);
+
+        $this->konsumenModel->update($this->session->userdata('id_konsumen'), $data);
 
         redirect(site_url(), 'refresh');
     }
@@ -89,9 +89,13 @@ class Akun extends Frontend
 
     public function pesanan()
     {
-        $data['pesanan'] = $this->db->where('id_konsumen', $this->session->userdata('id_konsumen'))->order_by('id_pesanan', 'desc')->get('tbl_pesanan')->result();
-        $tmp['content'] = $this->load->view('pesanan', $data, true);
-        $this->load->view('template', $tmp);
+        // {
+        //     $data['pesanan'] = $this->db->where('id_konsumen', $this->session->userdata('id_konsumen'))->order_by('id_pesanan', 'desc')->get('tbl_pesanan')->result();
+        //     $tmp['content'] = $this->load->view('pesanan', $data, true);
+        //     $this->load->view('template', $tmp);
+        $this->data['pesanan'] = $this->pesananModel->get(false, false, false, ['id_konsumen', $this->session->userdata('id_konsumen')]);
+
+        $this->blade->view('frontend/pesanan', $this->data);
     }
 
     public function konfirmasi($id)
@@ -121,21 +125,12 @@ class Akun extends Frontend
 
     public function invoice($id)
     {
-		// $this->data['detail_pesan'] = $this->db->where('id_pesanan', $id)
-		// ->join('tbl_produk', 'tbl_detail_pesan.id_produk = tbl_produk.id_produk')
-		// ->get('tbl_detail_pesan')->result();
-		// $this->data['pesanan'] = $this->db->where('id_pesanan', $id)
-		// ->join('tbl_konsumen', 'tbl_pesanan.id_konsumen = tbl_konsumen.id_konsumen')
-		// ->get('tbl_pesanan')->result();
-
-		// $this->load->view('invoice', $data);
-		
-		$this->data['detail_pesan'] = $this->detailPesanModel->get(false, false, false, [
-			"id_pesanan" => $id
-		]);
-		$this->data['pesanan'] = $this->pesananModel->get(false, false, false, [
-			"id_pesanan" => $id
-		]);
+        $this->data['detail_pesan'] = $this->detailPesanModel->get(false, false, false, [
+            "id_pesanan" => $id,
+        ]);
+        $this->data['pesanan'] = $this->pesananModel->get(false, false, false, [
+            "id_pesanan" => $id,
+        ]);
 
         $this->blade->view('frontend/invoice', $this->data);
     }
