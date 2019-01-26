@@ -5,11 +5,11 @@ class Konsumen extends CI_Controller {
 
 	public function index()
 	{
-		$data['konsumen'] = $this->db->get('tbl_konsumen')->result();
+		$this->data['konsumen'] = $this->db->get('tbl_konsumen')->result();
 		// $tmp['content'] = $this->load->view('admin/konsumen/index', $data ,true);
 		// $this->load->view('admin/template',$tmp);	
 
-		$this->blade->view("admin/konsumen/index");
+		$this->blade->view("admin/konsumen/index", $this->data);
 	}
 
 	public function hapus($id)

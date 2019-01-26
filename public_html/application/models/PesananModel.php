@@ -14,18 +14,20 @@ class PesananModel extends CI_Model
 
         $this->db->join(KonsumenModel::$table, KonsumenModel::$table . '.id_konsumen = ' . self::$table . '.id_konsumen', 'left');
 
-        if(isset($params['id_pesanan'])){
-            $this->db->where(self::$table.".id_pesanan", $params['id_pesanan']);
+        if (isset($params['id_pesanan'])) {
+            $this->db->where(self::$table . ".id_pesanan", $params['id_pesanan']);
         }
     }
 
     public function get($limit = false, $offset = false, $id_pesanan = false, $params = [])
     {
+        $this->select($params);
+
         if ($id_pesanan) {
             $this->db->where('id_pesanan', $id_pesanan);
             return $this->db->get(self::$table)->row();
         } else {
-            return $this->db->get(self::$table, $limit, $offset)->resutl();
+            return $this->db->get(self::$table, $limit, $offset)->result();
         }
     }
 
