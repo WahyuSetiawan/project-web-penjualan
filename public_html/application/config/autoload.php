@@ -138,5 +138,8 @@ $autoload['model'] = array(
     'produkModel', 
     'kategoriModel',
     'supplierModel',
-    'pembelianModel'
+    'pembelianModel',
+    'konsumenModel',
+    'detailPesanModel',
+    'pesananModel'
 );

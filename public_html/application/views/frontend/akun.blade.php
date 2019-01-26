@@ -8,16 +8,16 @@
 					<h3>Informasi akun</h3>
 					<form action="<?php echo site_url('akun/ubah') ?>" method="post">
 						<div class="form-group">
-							<input type="text" class="form-control" name="namalengkap"  placeholder="Nama Lengkap" value="<?php echo $user[0]->nama_konsumen ?>">
+							<input type="text" class="form-control" name="namalengkap"  placeholder="Nama Lengkap" value="<?php echo $user->nama_konsumen ?>">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" name="email" placeholder="Email" value="<?php echo $user[0]->email_konsumen ?>">
+							<input type="text" class="form-control" name="email" placeholder="Email" value="<?php echo $user->email_konsumen ?>">
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-control" name="password" placeholder="Password" value="">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" name="nohp"  placeholder="No Hp" value="<?php echo $user[0]->no_hp_konsumen ?>">
+							<input type="text" class="form-control" name="nohp"  placeholder="No Hp" value="<?php echo $user->no_hp_konsumen ?>">
 						</div>
 						<button type="submit" class="btn btn-primary btn-block">Ubah</button>
 					</form>
