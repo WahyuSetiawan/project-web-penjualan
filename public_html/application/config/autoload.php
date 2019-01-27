@@ -141,5 +141,6 @@ $autoload['model'] = array(
     'pembelianModel',
     'konsumenModel',
     'detailPesanModel',
-    'pesananModel'
+    'pesananModel',
+    "viewStokModel"
 );

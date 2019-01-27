@@ -16,7 +16,7 @@ class Home extends Frontend
     {
 
         $this->data['categori'] = $this->kategoriModel->get();
-        $this->data['related'] = $this->produkModel->get(false, 6, false, [], ['rand()']);
+        $this->data['related'] = $this->viewStokModel->get(false, 6, false, [], ['rand()']);
 
         $page = $this->uri->segment(3);
         $limit = 12;
@@ -26,11 +26,11 @@ class Home extends Frontend
             $offset = $page;
         endif;
 
-        $num_rows = $this->produkModel->count();
+        $num_rows = $this->viewStokModel->count();
 
         $this->data["paginator"] = $this->pagination($num_rows, $limit);
 
-        $this->data['produk'] = $this->produkModel->get(false, $limit, $offset);
+        $this->data['produk'] = $this->viewStokModel->get(false, $limit, $offset);
 
         $this->blade->view('frontend/produk_list', $this->data);
     }
@@ -60,16 +60,19 @@ class Home extends Frontend
 
     public function detail($id_produk)
     {
-        $this->data['produk'] = $this->db
-            ->select('*,tbl_produk_kategori.nama_kategori')
-            ->where('id_produk', $id_produk)
-            ->join('tbl_produk_kategori', 'tbl_produk.id_kategori=tbl_produk_kategori.id_kategori')
-            ->get('tbl_produk')->result();
-        $this->data['related'] = $this->db
-            ->select('*,tbl_produk_kategori.nama_kategori')
-            ->join('tbl_produk_kategori', 'tbl_produk.id_kategori=tbl_produk_kategori.id_kategori')
-            ->order_by('rand()')
-            ->get('tbl_produk')->result();
+        // $this->data['produk'] = $this->db
+        //     ->select('*,tbl_produk_kategori.nama_kategori')
+        //     ->where('id_produk', $id_produk)
+        //     ->join('tbl_produk_kategori', 'tbl_produk.id_kategori=tbl_produk_kategori.id_kategori')
+        //     ->get('tbl_produk')->result();
+        // $this->data['related'] = $this->db
+        //     ->select('*,tbl_produk_kategori.nama_kategori')
+        //     ->join('tbl_produk_kategori', 'tbl_produk.id_kategori=tbl_produk_kategori.id_kategori')
+        //     ->order_by('rand()')
+        //     ->get('tbl_produk')->result();
+
+        $this->data['produk'] = $this->viewStokModel->get($id_produk);
+        $this->data['related'] = $this->viewStokModel->get(false, 6, false, [], ['rand()']);
 
         $this->blade->view('frontend/detail', $this->data);
     }

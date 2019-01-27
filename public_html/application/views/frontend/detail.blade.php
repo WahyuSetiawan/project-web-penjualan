@@ -1,5 +1,4 @@
-@extends('frontend/template', $head)
-
+@extends('frontend/template', $head) 
 @section('content')
 <section id="page-title" class="page-title shop shop-single">
 	<div class="container shop-content">
@@ -17,29 +16,33 @@
 			<div class="col-xs-12 col-sm-12 col-md-5">
 				<div class="prodcut-images">
 					<div class="product-img-slider">
-						<img src="<?php if ($produk[0]->gambar_1){ echo base_url($produk[0]->gambar_1); } ?>">
-						<img src="<?php if ($produk[0]->gambar_2){ echo base_url($produk[0]->gambar_2); } ?>">
-						<img src="<?php if ($produk[0]->gambar_3){ echo base_url($produk[0]->gambar_3); } ?>">
-						<img src="<?php if ($produk[0]->gambar_4){ echo base_url($produk[0]->gambar_4); } ?>">
+						<img src="<?php if ($produk->gambar_1){ echo base_url($produk->gambar_1); } ?>">
+						<img src="<?php if ($produk->gambar_2){ echo base_url($produk->gambar_2); } ?>">
+						<img src="<?php if ($produk->gambar_3){ echo base_url($produk->gambar_3); } ?>">
+						<img src="<?php if ($produk->gambar_4){ echo base_url($produk->gambar_4); } ?>">
 
 					</div>
 					<div class="product-img-nav">
-						<img src="<?php if ($produk[0]->gambar_1){ echo base_url($produk[0]->gambar_1); } ?>">
-						<img src="<?php if ($produk[0]->gambar_2){ echo base_url($produk[0]->gambar_2); } ?>">
-						<img src="<?php if ($produk[0]->gambar_3){ echo base_url($produk[0]->gambar_3); } ?>">
-						<img src="<?php if ($produk[0]->gambar_4){ echo base_url($produk[0]->gambar_4); } ?>">
+						<img src="<?php if ($produk->gambar_1){ echo base_url($produk->gambar_1); } ?>">
+						<img src="<?php if ($produk->gambar_2){ echo base_url($produk->gambar_2); } ?>">
+						<img src="<?php if ($produk->gambar_3){ echo base_url($produk->gambar_3); } ?>">
+						<img src="<?php if ($produk->gambar_4){ echo base_url($produk->gambar_4); } ?>">
 					</div>
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-7">
 				<div class="product-title text-center-xs">
-					<h3><?php echo $produk[0]->nama_produk ?></h3>
+					<h3>
+						<?php echo $produk->nama_produk ?>
+					</h3>
 				</div>
 
 				<!-- .product-title end -->
 				<div class="product-meta mb-30">
 					<div class="product-price pull-left pull-none-xs">
-						<p>Rp. <?php echo number_format($produk[0]->harga_produk) ?></p>
+						<p>Rp.
+							<?php echo number_format($produk->harga_produk) ?>
+						</p>
 					</div>
 				</div>
 				<!-- .product-img end -->
@@ -47,14 +50,20 @@
 				<hr class="mt-30 mb-30">
 				<div class="product-details text-center-xs">
 					<ul class="list-unstyled">
-						<li>Kategori : <span><?php echo $produk[0]->nama_kategori ?></span></li>
-						<li>Code : <span>#P0<?php echo $produk[0]->id_produk ?></span></li>
-						<li>Stok : <span><?php echo $produk[0]->stok_produk ?></span></li>
+						<li>Kategori : <span>{{$produk->nama_kategori}} </span></li>
+						<li>Code : <span>#P0{{$produk->id_produk}}</span></li>
+						<li>Stok : <span>
+						@if ($produk->tersedia == "0")
+							Tersedia
+						@else
+							Tidak tersedia
+						@endif	
+						</span></li>
 					</ul>
 				</div>
 				<!-- .product-details end -->
 				<div class="product-action">
-					<form method="post" action="<?php echo site_url('order/add_keranjang') ?>">
+					<form method="post" action="{{site_url('order/add_keranjang')}}">
 						<div class="product-quantity">
 							<span class="qua">Jumlah Pesan:</span>
 							<span>
@@ -66,9 +75,9 @@
 							</span>
 							<br>
 							<span>
-								<button type="submit" name="beli" value="<?php echo $produk[0]->id_produk ?>" class="btn btn-primary btn-black btn-block">Beli Produk Ini</button>
-							</span>					
-						</div> 
+								<button type="submit" name="beli" value="<?php echo $produk->id_produk ?>" class="btn btn-primary btn-black btn-block">Beli Produk Ini</button>
+							</span>
+						</div>
 					</form>
 					<hr>
 				</div>
@@ -98,7 +107,7 @@
 						<li role="presentation" class="active">
 							<a href="#description" aria-controls="description" role="tab" data-toggle="tab">description</a>
 						</li>
-					<!-- 	<li role="presentation">
+						<!-- 	<li role="presentation">
 							<a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">reviews(2)</a>
 						</li> -->
 					</ul>
@@ -106,7 +115,9 @@
 					<!-- Tab panes -->
 					<div class="tab-content">
 						<div role="tabpanel" class="tab-pane active" id="description">
-							<p><?php echo $produk[0]->deskripsi_produk ?></p>
+							<p>
+								<?php echo $produk->deskripsi_produk ?>
+							</p>
 						</div>
 
 						<!-- #details end -->
@@ -123,15 +134,17 @@
 										<i class="fa fa-star-half-o"></i>
 									</div>
 									<div class="product-comment">
-										<p>Lorem ipsum dolor sit amet, mauris suspendisse viverra eleifend tortor tellus suscipit, tortor aliquet at nulla mus, dignissim neque, nulla neque. Ultrices proin mi urna nibh ut, aenean sollicitudin etiam libero nisl, ultrices ridiculus in magna purus consequuntur, ipsum donec orci ad vitae pede, id odio.</p>
+										<p>Lorem ipsum dolor sit amet, mauris suspendisse viverra eleifend tortor tellus suscipit, tortor aliquet at nulla
+											mus, dignissim neque, nulla neque. Ultrices proin mi urna nibh ut, aenean sollicitudin etiam libero nisl, ultrices
+											ridiculus in magna purus consequuntur, ipsum donec orci ad vitae pede, id odio.</p>
 									</div>
 								</li>
 								<!-- .review-comment end -->
 							</ul>
 							<div class="form-review">
 								<form>
-									<input type="text" class="form-control" id="name" placeholder="Your Name"/>
-									<input type="email" class="form-control" id="email" placeholder="Your Email"/>
+									<input type="text" class="form-control" id="name" placeholder="Your Name" />
+									<input type="email" class="form-control" id="email" placeholder="Your Email" />
 									<select class="form-control">
 										<option selected="" value="Default">Your Rating</option>
 										<option value="1">1</option>
@@ -163,29 +176,30 @@
 
 							<?php foreach ($related as $row): ?>
 
-								<div class="col-xs-12 col-sm-6 col-md-3 product">
-									<div class="product-img">
-										<img src="<?php echo base_url().$row->gambar_1 ?>" alt="Product" style=" margin: 0 3px 2px 0; -o-object-fit: none; object-fit: cover;    width:100%;   height:250px;"/>
-										<div class="product-hover">
-											<div class="product-action">
-												<a class="btn btn-primary" href="<?php echo site_url('home/detail/'.$row->id_produk) ?>">Beli</a>
-											</div>
-										</div>
-									</div>
-									<div class="product-bio">
-										<div class="prodcut-cat">
-											<a href="<?php echo site_url('home/detail/'.$row->id_produk) ?>"><?php echo $row->nama_kategori ?></a>
-										</div>
-										<div class="prodcut-title" style="height: 100px;">
-											<h3>
-												<a href="<?php echo site_url('home/detail/'.$row->id_produk) ?>"><?php echo $row->nama_produk ?></a>
-											</h3>
-										</div>
-										<div class="product-price">
-											<span class="symbole">Rp. </span><span><?php echo number_format($row->harga_produk) ?></span>
+							<div class="col-xs-12 col-sm-6 col-md-3 product">
+								<div class="product-img">
+									<img src="<?php echo base_url().$row->gambar_1 ?>" alt="Product" style=" margin: 0 3px 2px 0; -o-object-fit: none; object-fit: cover;    width:100%;   height:250px;"
+									/>
+									<div class="product-hover">
+										<div class="product-action">
+											<a class="btn btn-primary" href="<?php echo site_url('home/detail/'.$row->id_produk) ?>">Beli</a>
 										</div>
 									</div>
 								</div>
+								<div class="product-bio">
+									<div class="prodcut-cat">
+										<a href="<?php echo site_url('home/detail/'.$row->id_produk) ?>"><?php echo $row->nama_kategori ?></a>
+									</div>
+									<div class="prodcut-title" style="height: 100px;">
+										<h3>
+											<a href="<?php echo site_url('home/detail/'.$row->id_produk) ?>"><?php echo $row->nama_produk ?></a>
+										</h3>
+									</div>
+									<div class="product-price">
+										<span class="symbole">Rp. </span><span><?php echo number_format($row->harga_produk) ?></span>
+									</div>
+								</div>
+							</div>
 							<?php endforeach ?>
 
 
@@ -198,5 +212,4 @@
 	</div>
 	<!-- .container end -->
 </section>
-
 @endsection
