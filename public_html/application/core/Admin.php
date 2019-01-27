@@ -16,8 +16,11 @@ class Admin extends MY_Controller
 
     }
 
-    public function upload($_nama_file)
+    public function upload($_nama_file, $files = false)
     {
+        $this->load->library('upload');
+        $this->load->library('image_lib');
+
         $config['upload_path'] = './uploads/'; //path folder
         $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
         $config['max_size'] = '2048'; //maksimum besar file 2M
@@ -27,11 +30,11 @@ class Admin extends MY_Controller
         $config['create_thumb'] = false;
         $config['maintain_ratio'] = false;
 
-        $_FILES['userFile']['name'] = $files['userFile']['name'][$i];
-        $_FILES['userFile']['type'] = $files['userFile']['type'][$i];
-        $_FILES['userFile']['tmp_name'] = $files['userFile']['tmp_name'][$i];
-        $_FILES['userFile']['error'] = $files['userFile']['error'][$i];
-        $_FILES['userFile']['size'] = $files['userFile']['size'][$i];
+        $_FILES['userFile']['name'] = $files['name'];
+        $_FILES['userFile']['type'] = $files['type'];
+        $_FILES['userFile']['tmp_name'] = $files['tmp_name'];
+        $_FILES['userFile']['error'] = $files['error'];
+        $_FILES['userFile']['size'] = $files['size'];
 
         $this->upload->initialize($config);
         return $this->upload->do_upload('userFile');

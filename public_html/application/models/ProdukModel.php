@@ -33,10 +33,36 @@ class ProdukModel extends CI_Model
 
         if ($id) {
             $this->db->where(self::$table . ".id_produk", $id);
-            
-            return $this->db->get(self::$table)->row();
+
+            $data = $this->db->get(self::$table)->row();
+
+            $data->gambar_lain = [];
+            $data->kategori = [];
+
+            $data->gambar_lain = $this->gambarProdukModel->get(false, false, false, ['id_produk' => $data->id_produk]);
+            $data_kategori = $this->detailKategoriModel->get(false, false, false, ['id_produk' => $data->id_produk]);
+
+            foreach ($data_kategori as $key => $value_kategori) {
+                $data->kategori[$value_kategori->id_kategori] = $value_kategori;
+            }
+
+            return $data;
         } else {
-            return $this->db->get(self::$table, $limit, $offset)->result();
+            $data = $this->db->get(self::$table, $limit, $offset)->result();
+
+            foreach ($data as $key => &$value) {
+                $value->gambar_lain = [];
+                $value->kategori = [];
+
+                $value->gambar_lain = $this->gambarProdukModel->get(false, false, false, ['id_produk' => $value->id_produk]);
+                $data_kategori = $this->detailKategoriModel->get(false, false, false, ['id_produk' => $value->id_produk]);
+
+                foreach ($data_kategori as $key => $value_kategori) {
+                    $value->kategori[$value_kategori->id_kategori] = $value_kategori;
+                }
+            }
+
+            return $data;
         }
     }
 

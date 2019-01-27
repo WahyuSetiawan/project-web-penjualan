@@ -116,7 +116,7 @@
 					<div class="tab-content">
 						<div role="tabpanel" class="tab-pane active" id="description">
 							<p>
-								<?php echo $produk->deskripsi_produk ?>
+								{{$produk->deskripsi_produk }}
 							</p>
 						</div>
 

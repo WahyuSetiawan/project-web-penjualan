@@ -1,5 +1,4 @@
-@extends('admin/template')
-
+@extends('admin/template') 
 @section('content')
 <div class="au-card recent-report">
 
@@ -9,7 +8,7 @@
       <div class="table-data__tool-left"></div>
       <div class="table-data__tool-right">
 
-        <a href="<?php echo site_url('admin/produk/tambah_produk') ?>">
+        <a href="{{ site_url('admin/produk/add') }}">
 
           <button class="au-btn au-btn-icon au-btn--green au-btn--small">
             <i class="zmdi zmdi-plus"></i>Tambah Produk</button></a>
@@ -30,23 +29,14 @@
         <tbody>
           <?php foreach ($produk as $row): ?>
           <tr>
+            <td> {{$row->nama_produk }} </td>
+            <td> {{$row->nama_kategori }} </td>
+            <td> {{$row->harga_produk }} </td>
+            <td> {{$row->stok_produk }} </td>
             <td>
-              <?php echo $row->nama_produk ?>
-            </td>
-            <td>
-              <?php echo $row->nama_kategori ?>
-            </td>
-            <td>
-              <?php echo $row->harga_produk ?>
-            </td>
-            <td>
-              <?php echo $row->stok_produk ?>
-            </td>
-            <td>
-              <a href="<?php echo site_url('admin/produk/edit/'.$row->id_produk) ?>"><button class="btn btn-info btn-sm">Edit</button></a>
-              <a href="<?php echo site_url('admin/produk/hapus/'.$row->id_produk) ?>" onclick="return confirm('Anda Yakin Ingin Menghapus ?')"><button
+              <a href="{{ site_url('admin/produk/edit/'.$row->id_produk)}}"><button class="btn btn-info btn-sm">Edit</button></a>
+              <a href="{{ site_url('admin/produk/hapus/'.$row->id_produk)}}" onclick="return confirm('Anda Yakin Ingin Menghapus ?')"><button
                   class="btn btn-danger btn-sm">Hapus</button></a>
-
             </td>
           </tr>
           <?php endforeach ?>
@@ -58,13 +48,12 @@
   </div>
 </div>
 @endsection
-
-
-
+ 
 @section('js')
 <script type="text/javascript">
   $(document).ready(function () {
     $('#example4').DataTable();
   });
+
 </script>
 @endsection
