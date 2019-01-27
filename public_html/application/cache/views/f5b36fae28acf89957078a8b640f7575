@@ -36,7 +36,7 @@
 				<button id="btnAdd" type="button" class="btn btn-primary tambah_button btn-sm" data-toggle="tooltip" data-original-title="Add more controls"><i class="glyphicon glyphicon-plus-sign"></i>&nbsp; Tambah Pesanan&nbsp;</button>
 
 				<div class="tambah_baru" style="display: none">
-					<form method="post" action="<?php echo e(site_url("admin/pesanan/ubah/ " . $pesanan->id_pesanan)); ?>">
+					<form method="post" action="<?php echo e(site_url("admin/pesanan/ubah/" . $pesanan[->id_pesanan)); ?>">
 						<div class="form-group">
 							<label for="exampleInputEmail1">Nama Produk</label>
 							<select class="form-control" name="id_produk">

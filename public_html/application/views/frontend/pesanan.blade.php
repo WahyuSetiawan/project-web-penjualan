@@ -31,17 +31,20 @@
 							<td> {{ $r->nama_penerima }} </td>
 							<td> {{ $r->alamat.', '.$r->provinsi_penerima.', '.$r->kota_penerima.'<br>'. $r->kode_pos }} </td>
 							<td>Rp. {{number_format($r->total_bayar) }} </td>
-							<td> {{ $r->kurir }} -
+							<td> {{ $r->kurir }} - @if ($r->resi_pengiriman!=null) {{ $r->resi_pengiriman }} @else Resi belum di proses @endif
+
 								<?php 
-										if ($r->resi_pengiriman!=null) {
-											echo $r->resi_pengiriman;
-										}else{
-											echo "Resi Belum Di Proses";
-										}
+										// if ($r->resi_pengiriman!=null) {
+										// 	echo $r->resi_pengiriman;
+										// }else{
+										// 	echo "Resi Belum Di Proses";
+										// }
 										?>
 							</td>
-							<td>Rp. {{ number_format($r->jumlah_ongkir)}} </td>
+							<td>Rp. {{ number_format($r->jumlah_ongkir) }} </td>
 							<td>
+								
+			
 								<?php 
 										switch ($r->status_pesanan) {
 											case 'Dikonfirmasi':
@@ -49,13 +52,16 @@
 											break;
 											
 											default:
-											?>
 
-								<?php echo form_open_multipart('akun/konfirmasi/'.$r->id_pesanan, ['id'=>'form_validation'] ,['method'=>'post'])?>
+								// 		<?php echo form_open_multipart('akun/konfirmasi/'.$r->id_pesanan, ['id'=>'form_validation'] ,['method'=>'post'])
+								// <input type="file" name="pic" class="form-control" required="" value="BUkti Transfer">
+								// <button type='submit' class='btn btn-danger btn-block btn-sm'>Konfirmasi Pesanan</button>
+								// <?php form_close() ?>
+
+<?php echo form_open_multipart('akun/konfirmasi/'.$r->id_pesanan, ['id'=>'form_validation'] ,['method'=>'post'])?>
 								<input type="file" name="pic" class="form-control" required="" value="BUkti Transfer">
 								<button type='submit' class='btn btn-danger btn-block btn-sm'>Konfirmasi Pesanan</button>
-								<?php form_close() ?>
-
+								<?php form_close() ?> 
 
 
 								<?php 
