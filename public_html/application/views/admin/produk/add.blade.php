@@ -7,7 +7,8 @@
 		</h3>
 
 		<form action="<?php	if (isset($produk)) {echo base_url('admin/produk/ubah/'.$produk->id_produk); } else { echo
-		 base_url("admin/produk/simpan"); } ?>" id="form_validation" method="POST"
+		 base_url("
+		 admin/produk/simpan"); } ?>" id="form_validation" method="POST"
 			enctype="multipart/form-data">
 
 			<div class="form-group form-float">
@@ -16,23 +17,6 @@
 					<input type="text" class="form-control" name="nama" required value="{{(isset($produk->nama_produk))? $produk->nama_produk: ""}}">
 				</div>
 			</div>
-
-			<?php /* ?>
-
-			<div class="form-group form-float">
-				<div class="form-line">
-					<label class="form-label">Kategori Produk</label>
-					<select name="kategori" class="form-control show-tick" required>
-						<option value="">-- Pilih Kategori --</option>
-						<?php foreach ($kategori as $row) {?>
-						<option value="<?=($row->id_kategori)?>">
-							<?=($row->nama_kategori)?>
-						</option>
-						<?php } ?>
-					</select>
-				</div>
-			</div>
-			*/ ?>
 
 			@foreach ($produk->kategori as $item)
 			<input type="hidden" name="last_kategori[{{$item->id_kategori}}]" value="{{$item->id_detail_kategori}}" />
@@ -100,6 +84,10 @@
 						<td>Image</td>
 					</tr>
 				</thead>
+
+				@if (isset($produk->gambar_lain)) @foreach ($produk->gambar_lain as $key => $value)
+				<input type="hidden" name="pic_last_tmp[{{$value->id_gambar_produk}}]" value="{{$value->path}}" />
+				@endforeach @endif
 
 				<tbody id="TextBoxContainer">
 					@if (isset($produk->gambar_lain)) @foreach ($produk->gambar_lain as $key => $value)

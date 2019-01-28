@@ -39,7 +39,7 @@ class GambarProdukModel extends CI_Model
 
     public function del($id)
     {
-        $this->db->where("id_gambar_gambar", $id);
+        $this->db->where("id_gambar_produk", $id);
         return $this->db->delete(self::$table);
     }
 
