@@ -8,7 +8,7 @@ class Akun extends Frontend
     {
         $this->data['user'] = $this->konsumenModel->get(false, false, $this->session->userdata('id_konsumen'));
 
-        $this->blade->view('frontend/akun', $this->data);
+        $this->blade->view('akun', $this->data);
     }
 
     public function daftar()
@@ -95,7 +95,7 @@ class Akun extends Frontend
         //     $this->load->view('template', $tmp);
         $this->data['pesanan'] = $this->pesananModel->get(false, false, false, ['id_konsumen', $this->session->userdata('id_konsumen')]);
 
-        $this->blade->view('frontend/pesanan', $this->data);
+        $this->blade->view('pesanan', $this->data);
     }
 
     public function konfirmasi($id)
@@ -132,7 +132,7 @@ class Akun extends Frontend
             "id_pesanan" => $id,
         ]);
 
-        $this->blade->view('frontend/invoice', $this->data);
+        $this->blade->view('invoice', $this->data);
     }
 
 }

@@ -10,7 +10,7 @@ class Order extends Frontend {
 		// $tmp['content'] = $this->load->view('keranjang',$data , true);
 		// $this->load->view('template', $tmp);
 
-		$this->blade->view('frontend/keranjang', $this->data);
+		$this->blade->view('keranjang', $this->data);
 	}
 
 	public function add_keranjang()

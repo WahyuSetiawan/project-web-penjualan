@@ -8,7 +8,7 @@ class Home extends Frontend
     {
         $this->data['produk'] = $this->produkModel->get();
 
-        $this->blade->view("frontend/homepage", $this->data);
+        $this->blade->view("homepage", $this->data);
 
     }
 
@@ -32,7 +32,7 @@ class Home extends Frontend
 
         $this->data['produk'] = $this->viewStokModel->get(false, $limit, $offset);
 
-        $this->blade->view('frontend/produk_list', $this->data);
+        $this->blade->view('produk_list', $this->data);
     }
 
     public function kategori($id_kategori = '', $offset = 0)
@@ -55,7 +55,7 @@ class Home extends Frontend
 
         $this->data['produk'] = $this->produkModel->get(false, $limit, $offset, ['id_kategori' => $id_kategori]);
 
-        $this->blade->view('frontend/produk_list', $this->data);
+        $this->blade->view('produk_list', $this->data);
     }
 
     public function detail($id_produk)
@@ -74,6 +74,16 @@ class Home extends Frontend
         $this->data['produk'] = $this->viewStokModel->get($id_produk);
         $this->data['related'] = $this->viewStokModel->get(false, 6, false, [], ['rand()']);
 
-        $this->blade->view('frontend/detail', $this->data);
+        $this->blade->view('detail', $this->data);
+    }
+
+    public function about()
+    {
+    $this->blade->view("about");
+    }
+
+    public function contact()
+    {
+$this->blade->view('contact');
     }
 }
