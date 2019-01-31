@@ -1,3 +1,10 @@
+<?php /*
+
+modal untuk melakukan sing in costumer dan register costumer
+
+*/ ?>
+
+
 <div class="modal model-sign fade login-modal-lg" tabindex="-1" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -11,7 +18,7 @@
 
 					<div class="tab-content">
 						<div id="home" class="tab-pane fade in active">
-							<form class="mb-0" action="{{site_url('akun/login')}}" method="post">
+							<form class="mb-0" action="<?php echo e(site_url('akun/login')); ?>" method="post">
 								<div class="form-group">
 									<input type="email" class="form-control" name="email" placeholder="Email">
 								</div>
@@ -19,10 +26,12 @@
 									<input type="password" class="form-control" name="password" placeholder="Password">
 								</div>
 								<button type="submit" class="btn btn-primary btn-block">Sign In</button>
+								<a href="<?php echo e(base_url("home/lupapassword")); ?>" class="btn btn-primary btn-block">Lupa Password</a>
 							</form>
 						</div>
+
 						<div id="menu1" class="tab-pane fade">
-							<form action="{{site_url('akun/daftar')}}" method="post">
+							<form action="<?php echo e(site_url('akun/daftar')); ?>" method="post">
 								<div class="form-group">
 									<input type="text" class="form-control" name="namalengkap" placeholder="Nama Lengkap">
 								</div>
@@ -48,6 +57,13 @@
 </div>
 
 
+<?php /*
+
+penutup dari modal constumer sign in dan register
+
+*/ ?>
+
+
 
 <header id="navbar-spy" class="header header-1">
 	<div class="top-bar">
@@ -55,8 +71,8 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-6 col-md-5">
 					<ul class="list-inline top-contact">
-						<li><span>Phone :</span> {{ (isset($setting['phone']))? $setting['phone']->value:""}}</li>
-						<li><span>Email :</span> {{ (isset($setting['email']))? $setting['email']->value:""}}</li>
+						<li><span>Phone :</span> <?php echo e((isset($setting['phone']))? $setting['phone']->value:""); ?></li>
+						<li><span>Email :</span> <?php echo e((isset($setting['email']))? $setting['email']->value:""); ?></li>
 					</ul>
 				</div>
 				<div class="col-xs-12 col-sm-6 col-md-7">
@@ -64,7 +80,8 @@
 
 						<?php if ($head['session']->userdata('id_konsumen')) {?>
 						<li><span>Selamat Datang :</span>
-							{{ $head['session']->userdata('nama_konsumen')}}
+							<?php echo e($head['session']->userdata('nama_konsumen')); ?>
+
 						</li>
 						<?php 
 						}else{ ?>
@@ -94,8 +111,8 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="logo" href="{{base_url()}}">
-					<img src="{{base_url('assets/public')}}/assets/images/logo/logo-light.png" alt="Autoshop">
+				<a class="logo" href="<?php echo e(base_url()); ?>">
+					<img src="<?php echo e(base_url('assets/public')); ?>/assets/images/logo/logo-light.png" alt="Autoshop">
 				</a>
 			</div>
 
@@ -103,29 +120,29 @@
 			<div class="collapse navbar-collapse pull-right" id="header-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-left">
 					<li class="active">
-						<a href="{{(site_url())}}">Home</a>
+						<a href="<?php echo e((site_url())); ?>">Home</a>
 					</li>
 					<li>
-						<a href="{{site_url('home/produk_list')}}">Produk terbaru</a>
+						<a href="<?php echo e(site_url('home/produk_list')); ?>">Produk terbaru</a>
 					</li>
 					<li class="has-dropdown">
 						<a href="#" data-toggle="dropdown" class="dropdown-toggle">Kategori</a>
 						<ul class="dropdown-menu">
 
-							@foreach ($head['kategori'] as $item)
+							<?php foreach($head['kategori'] as $item): ?>
 							<li>
-								<a href=" {{site_url('home/kategori/'.$item->id_kategori)}}"> {{ $item->nama_kategori}}</a>
+								<a href=" <?php echo e(site_url('home/kategori/'.$item->id_kategori)); ?>"> <?php echo e($item->nama_kategori); ?></a>
 							</li>
-							@endforeach
+							<?php endforeach; ?>
 
 						</ul>
 					</li>
 					<!-- li end -->
 					<li>
-						<a href="{{base_url("about")}}">Tentang kami</a>
+						<a href="<?php echo e(base_url("home/about")); ?>">Tentang kami</a>
 					</li>
 					<li>
-						<a href="{{base_url("contact")}}">Kontak</a>
+						<a href="<?php echo e(base_url("home/contact")); ?>">Kontak</a>
 					</li>
 
 					<?php  if ($head['session']->userdata('id_konsumen')) {					?>
@@ -178,7 +195,7 @@
 					<div class="cart-box">
 						<div class="cart-overview">
 							<ul class="list-unstyled">
-								@foreach ($head['cart']->contents() as $items)
+								<?php foreach($head['cart']->contents() as $items): ?>
 								<li>
 									<img class="img-responsive" src="<?php echo base_url($items['image']) ?>" alt="product" />
 									<div class="product-meta">
@@ -194,7 +211,7 @@
 									</div>
 									<a class="cancel" href="<?php echo site_url('order/cancel_cart/'.$items['rowid']) ?>">cancel</a>
 								</li>
-								@endforeach
+								<?php endforeach; ?>
 							</ul>
 						</div>
 

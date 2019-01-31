@@ -9,12 +9,10 @@ class Home extends Frontend
         $this->data['produk'] = $this->produkModel->get();
 
         $this->blade->view("homepage", $this->data);
-
     }
 
     public function produk_list($offset = 0)
     {
-
         $this->data['categori'] = $this->kategoriModel->get();
         $this->data['related'] = $this->viewStokModel->get(false, 6, false, [], ['rand()']);
 
@@ -60,17 +58,6 @@ class Home extends Frontend
 
     public function detail($id_produk)
     {
-        // $this->data['produk'] = $this->db
-        //     ->select('*,tbl_produk_kategori.nama_kategori')
-        //     ->where('id_produk', $id_produk)
-        //     ->join('tbl_produk_kategori', 'tbl_produk.id_kategori=tbl_produk_kategori.id_kategori')
-        //     ->get('tbl_produk')->result();
-        // $this->data['related'] = $this->db
-        //     ->select('*,tbl_produk_kategori.nama_kategori')
-        //     ->join('tbl_produk_kategori', 'tbl_produk.id_kategori=tbl_produk_kategori.id_kategori')
-        //     ->order_by('rand()')
-        //     ->get('tbl_produk')->result();
-
         $this->data['produk'] = $this->viewStokModel->get($id_produk);
         $this->data['related'] = $this->viewStokModel->get(false, 6, false, [], ['rand()']);
 
@@ -79,11 +66,89 @@ class Home extends Frontend
 
     public function about()
     {
-    $this->blade->view("about");
+        $this->blade->view("about", $this->data);
     }
 
     public function contact()
     {
-$this->blade->view('contact');
+        $this->blade->view('contact', $this->data);
     }
+
+    public function replacepasword()
+    {
+        $hash = $this->input->get("hash");
+
+        if ($hash !== false) {
+            $data_konstumer = $this->konsumenModel->getResetPassword($hash);
+
+            var_dump($data_konstumer);
+        }
+    }
+
+    public function lupapassword()
+    {
+        if ($this->input->post("email") !== false) {
+            $email = $this->input->post("email");
+
+            $tmp_forgot_password = $this->randomPassword();
+
+            $costumer = $this->konsumenModel->getEmail($email);
+
+            if ($costumer != null) {
+                $this->konsumenModel->put($costumer->id_konsumen, [
+                    'tmp_forgot_password' => $tmp_forgot_password,
+                ]);
+
+                $config = array(
+                    'protocol' => 'smtp',
+                    'smtp_host' => 'ssl://smtp.googlemail.com',
+                    'smtp_port' => 465,
+                    'smtp_user' => '',
+                    'smtp_pass' => '',
+                    'mailtype' => 'html',
+                    'charset' => 'iso-8859-1',
+                );
+
+                $this->load->library('email');
+                $this->email->initialize($config);
+                $this->email->set_newline("\r\n");
+
+                $this->email->from("wahyu.creator911@gmail.com");
+                $this->email->to("wahyu.creator911@gmail.com");
+
+                $this->email->subject("Reset Password");
+                $this->email->message("Testing reset email " . $tmp_forgot_password);
+
+                if ($this->email->send()) {
+                    echo "berhasil mengirim data";
+                } else {
+                    echo $this->email->print_debugger(array('headers'));
+                    echo "tidak berhasil mengirim data";
+                }
+            } else {
+                $this->data["email_not_exists"] = "Email tidak ditemukan !";
+            }
+
+        } else {
+            $this->blade->view("forgotpassword", $this->data);
+        }
+    }
+
+    private function randomPassword()
+    {
+        $digit = 15;
+        $karakter = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+        srand((double) microtime() * 1000000);
+        $i = 0;
+        $pass = "";
+        while ($i <= $digit - 1) {
+            $num = rand() % 32;
+            $tmp = substr($karakter, $num, 1);
+            $pass = $pass . $tmp;
+            $i++;
+        }
+        return $pass;
+    }
+
 }

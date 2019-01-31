@@ -1,4 +1,4 @@
-@extends('template', $head)
+@extends('part/template', $head)
 
 @section('content')
 <!-- ============================================= -->
@@ -59,11 +59,16 @@
 			<!-- .col-md-12 end -->
 			<div class="row">
 
-				<?php foreach ($produk as $row): ?>
+				{{--
 
+				dimana produk akan ditampilkan pada halaman home pertama
+
+				--}}
+
+				<?php foreach ($produk as $row): ?>
 				<div class="col-xs-12 col-sm-6 col-md-3 product">
 					<div class="product-img">
-						<img src="<?php echo $row->gambar_1 ?>" alt="Product" style=" margin: 0 3px 2px 0; -o-object-fit: none; object-fit: cover;    width:100%;   height:250px;" />
+						<img src="<?php echo $row->gambar_utama ?>" alt="Product" style=" margin: 0 3px 2px 0; -o-object-fit: none; object-fit: cover;    width:100%;   height:250px;" />
 						<div class="product-hover">
 							<div class="product-action">
 								<a class="btn btn-primary" href="<?php echo site_url('home/detail/'.$row->id_produk) ?>">Beli</a>
@@ -89,6 +94,12 @@
 				</div>
 				<?php endforeach ?>
 
+				{{--
+
+				akhir dari tampilan data pertama
+
+				--}}
+
 			</div>
 			<!-- .row end -->
 			<div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -103,7 +114,7 @@
 
 
 <section id="clients" class="clients" style="padding-top: 0px;padding-bottom: 30px;">
-{{-- 
+	{{--
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12">

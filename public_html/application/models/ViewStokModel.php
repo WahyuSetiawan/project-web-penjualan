@@ -9,7 +9,7 @@ class ViewStokModel extends CI_Model
     public function select($params = [], $order = [])
     {
         $order_string = "";
-        
+
         foreach ($order as $index => $value) {
             if ($index <= 0) {
                 $order_string .= "$value";
@@ -30,20 +30,30 @@ class ViewStokModel extends CI_Model
 
         if ($id) {
             $this->db->where(self::$view . ".id_produk", $id);
-
-            return $this->db->get(self::$view)->row();
+            $data = $this->db->get(self::$view)->row();
+            $this->getGambar($data);
+            return $data;
         } else {
-            return $this->db->get(self::$view, $limit, $offset)->result();
+            $data = $this->db->get(self::$view, $limit, $offset)->result();
+
+            foreach ($data as $key => &$value) {
+                $this->getGambar($value);
+            }
+
+            return $data;
         }
+    }
+
+    private function getGambar(&$row)
+    {
+        $row->gambar = $this->gambarProdukModel->get(false, false, false, ["id_produk" => $row->id_produk]);
     }
 
     public function count($params = [])
     {
         $this->select($params);
-
         return $this->db->get(self::$view)->num_rows();
     }
-
 }
 
 /* End of file ViewStokModel.php */

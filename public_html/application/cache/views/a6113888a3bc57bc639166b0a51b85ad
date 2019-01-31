@@ -1,6 +1,5 @@
-@extends('part/template', $head)
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <section id="page-title" class="page-title shop shop-single">
 	<div class="container shop-content">
 		<div class="row">
@@ -18,16 +17,16 @@
 				<div class="prodcut-images">
 					<div class="product-img-slider">
 						<img src="<?php if ($produk->gambar_utama){ echo base_url($produk->gambar_utama); } ?>">
-						@foreach ($produk->gambar as $item)
+						<?php foreach($produk->gambar as $item): ?>
 						<img src="<?php if ($item->path){ echo base_url($item->path); } ?>">
-						@endforeach
+						<?php endforeach; ?>
 
 					</div>
 					<div class="product-img-nav">
 						<img src="<?php if ($produk->gambar_utama){ echo base_url($produk->gambar_utama); } ?>">
-						@foreach ($produk->gambar as $item)
+						<?php foreach($produk->gambar as $item): ?>
 						<img src="<?php if ($item->path){ echo base_url($item->path); } ?>">
-						@endforeach
+						<?php endforeach; ?>
 					</div>
 				</div>
 			</div>
@@ -51,20 +50,20 @@
 				<hr class="mt-30 mb-30">
 				<div class="product-details text-center-xs">
 					<ul class="list-unstyled">
-						<li>Kategori : <span>{{$produk->nama_kategori}} </span></li>
-						<li>Code : <span>#P0{{$produk->id_produk}}</span></li>
+						<li>Kategori : <span><?php echo e($produk->nama_kategori); ?> </span></li>
+						<li>Code : <span>#P0<?php echo e($produk->id_produk); ?></span></li>
 						<li>Stok : <span>
-								@if ($produk->tersedia == "0")
+								<?php if($produk->tersedia == "0"): ?>
 								Tersedia
-								@else
+								<?php else: ?>
 								Tidak tersedia
-								@endif
+								<?php endif; ?>
 							</span></li>
 					</ul>
 				</div>
 				<!-- .product-details end -->
 				<div class="product-action">
-					<form method="post" action="{{site_url('order/add_keranjang')}}">
+					<form method="post" action="<?php echo e(site_url('order/add_keranjang')); ?>">
 						<div class="product-quantity">
 							<span class="qua">Jumlah Pesan:</span>
 							<span>
@@ -118,7 +117,8 @@
 					<div class="tab-content">
 						<div role="tabpanel" class="tab-pane active" id="description">
 							<p>
-								{{$produk->deskripsi_produk }}
+								<?php echo e($produk->deskripsi_produk); ?>
+
 							</p>
 						</div>
 
@@ -218,4 +218,5 @@
 	</div>
 	<!-- .container end -->
 </section>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('template', $head, array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

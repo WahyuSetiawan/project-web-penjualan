@@ -34,18 +34,18 @@
 			$('#example').DataTable();
 		});
 	</script>
+<?php /*{{($setting['title'])?$setting['setting']:""}} */?>
 
-
-	<title>{{($setting['title'])?$setting['setting']:""}}</title>
+	<title>Ol Shop</title>
 </head>
 
 <body>
 	<!-- Document Wrapper
 	============================================= -->
 	<div id="wrapper" class="wrapper clearfix">
-		@include('header', $head)
+		@include('part/header', $head)
 		@yield('content')
-		@include('footer', $head)
+		@include('part/footer', $head)
 	</div>
 	<!-- #wrapper end -->
 

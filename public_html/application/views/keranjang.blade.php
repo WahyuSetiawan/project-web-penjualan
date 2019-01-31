@@ -1,4 +1,4 @@
-@extends('template', $head)
+@extends('part/template', $head)
 
 @section('content')
 <section id="page-title" class="page-title shop shop-single" style="padding-bottom: 0px;">

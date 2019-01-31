@@ -7,16 +7,24 @@ class KonsumenModel extends CI_Model
 
     public function get($limit = false, $offset = false, $id = false, $params = [])
     {
-
         if ($id) {
             $this->db->where('id_konsumen', $id);
-
             return $this->db->get(self::$table)->row();
-
         } else {
             return $this->db->get(self::$table, $limit, $offset)->result();
-
         }
+    }
+
+    public function getEmail($email)
+    {
+        $this->db->where("email_konsumen", $email);
+        return $this->db->get(self::$table)->row();
+    }
+
+    public function getResetPassword($hash)
+    {
+        $this->db->where("tmp_forgot_password", $hash);
+        return $this->db->get(self::$table)->row();
     }
 
     public function set($data)
@@ -35,10 +43,9 @@ class KonsumenModel extends CI_Model
         $this->db->where('id_konsumen', $id);
         $this->db->delete(self::$table);
     }
-    
+
     public function login($username, $password)
     {
-
         $password = md5($password);
 
         $this->db->where('email_konsumen', $username);

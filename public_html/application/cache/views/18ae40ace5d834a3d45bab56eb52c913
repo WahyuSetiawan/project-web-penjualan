@@ -34,9 +34,9 @@
 			$('#example').DataTable();
 		});
 	</script>
+<?php /*{{($setting['title'])?$setting['setting']:""}} */?>
 
-
-	<title><?php echo e(($setting['title'])?$setting['setting']:""); ?></title>
+	<title>Ol Shop</title>
 </head>
 
 <body>

@@ -1,4 +1,4 @@
-@extends('template', $head) 
+@extends('part/template', $head) 
 @section('content')
 <section id="testimonials" class="testimonial  bg-gray">
 	<div class="container">
