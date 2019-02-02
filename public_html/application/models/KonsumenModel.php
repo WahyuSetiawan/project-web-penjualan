@@ -62,6 +62,14 @@ class KonsumenModel extends CI_Model
 
         return false;
     }
+
+    public function changePassword($hash, $password)
+    {
+        $md5_password = md5($password);
+
+        $this->db->where("tmp_forgot_password", $hash);
+        $this->db->update(self::$table, ["password_konsumen" => $md5_password]);
+    }
 }
 
 /* End of file KosumenModel.php */

@@ -89,10 +89,6 @@ class Akun extends Frontend
 
     public function pesanan()
     {
-        // {
-        //     $data['pesanan'] = $this->db->where('id_konsumen', $this->session->userdata('id_konsumen'))->order_by('id_pesanan', 'desc')->get('tbl_pesanan')->result();
-        //     $tmp['content'] = $this->load->view('pesanan', $data, true);
-        //     $this->load->view('template', $tmp);
         $this->data['pesanan'] = $this->pesananModel->get(false, false, false, ['id_konsumen', $this->session->userdata('id_konsumen')]);
 
         $this->blade->view('pesanan', $this->data);

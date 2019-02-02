@@ -44,7 +44,7 @@ services:
     volumes:
       - "./my.conf:/etc/mysql/conf.d/config-file.cnf"
       - "./data_mysql:/var/lib/mysql:rw"
-  phpmyadmin:
+  phpmyadmin1:
     image: bitnami/phpmyadmin:latest
     depends_on:
       - mariadb

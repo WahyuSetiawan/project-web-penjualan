@@ -1,36 +1,49 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Kategori_produk extends CI_Controller {
+class Kategori_produk extends Admin
+{
 
-	public function index()
-	{
-		$data['kategori'] = $this->db->get('tbl_produk_kategori')->result();
-		// $data['content'] = $this->load->view('kategori_produk/index',$data,true);
-		// $this->load->view('template',$data);
+    public function index()
+    {
+        $data['kategori'] = $this->db->get('tbl_produk_kategori')->result();
 
-		$this->blade->view('kategori_produk/index', $data);
-	}
+        $this->blade->view('kategori_produk/index', $data);
+    }
 
-	public function tambah_produk()
-	{
-		// $data['content'] = $this->load->view('kategori_produk/tambah','',true);
-		// $this->load->view('template',$data);
+    public function tambah_produk()
+    {
+        $this->blade->view('kategori_produk/tambah');
+    }
 
-		$this->blade->view('kategori_produk/tambah');
-	}
+    public function edit($id)
+    {
+        $this->data['data'] = $this->kategoriModel->get($id);
 
-	public function hapus($id)
-	{
-		$this->db->where('id_kategori', $id)->delete('tbl_produk_kategori');
-		redirect('kategori_produk','refresh');
-	}
+        $this->blade->view('kategori_produk/tambah', $this->data);
+    }
 
-	public function simpan()
-	{
-		$this->db->insert('tbl_produk_kategori', array('nama_kategori' => $this->input->post('nama_kategori')));
-		redirect('kategori_produk','refresh');
-	}
+    public function hapus($id)
+    {
+     $this->kategoriModel->del($id);
+        redirect('admin/kategori_produk', 'refresh');
+    }
+
+    public function simpan()
+    {
+        $data = ['nama_kategori' => $this->input->post('nama_kategori')];
+
+        $this->kategoriModel->set($data);
+
+        redirect('admin/kategori_produk', 'refresh');
+    }
+
+    public function put($id)
+    {
+		$data = ['nama_kategori' => $this->input->post('nama_kategori')];
+		$this->kategoriModel->put($id, $data);
+		redirect('admin/kategori_produk', 'refresh');
+    }
 
 }
 

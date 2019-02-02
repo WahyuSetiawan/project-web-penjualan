@@ -16,6 +16,7 @@ class KategoriModel extends CI_Model
     {
         if ($id) {
             $this->db->where(self::$table.".id_kategori", $id);
+            return $this->db->get(self::$table)->row();
         }
 
         return $this->db->get(self::$table, $limit, $offset)->result_object();

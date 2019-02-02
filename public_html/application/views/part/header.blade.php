@@ -122,7 +122,7 @@ penutup dari modal constumer sign in dan register
 						<a href="{{(site_url())}}">Home</a>
 					</li>
 					<li>
-						<a href="{{site_url('home/produk_list')}}">Produk terbaru</a>
+						<a href="{{site_url('home/produk_list')}}">Produk</a>
 					</li>
 					<li class="has-dropdown">
 						<a href="#" data-toggle="dropdown" class="dropdown-toggle">Kategori</a>

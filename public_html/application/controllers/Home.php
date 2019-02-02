@@ -66,23 +66,43 @@ class Home extends Frontend
 
     public function about()
     {
+        // im tire and do not have idea to making this page design
         $this->blade->view("about", $this->data);
     }
 
     public function contact()
     {
+        // same do not have any design web anymore
         $this->blade->view('contact', $this->data);
     }
 
     public function replacepasword()
     {
         $hash = $this->input->get("hash");
+        $new_password = $this->input->post("new_password");
+        $new_password_repeate = $this->input->post("new_password_repeat");
 
         if ($hash !== false) {
-            $data_konstumer = $this->konsumenModel->getResetPassword($hash);
+            if ($new_password !== null && $new_password_repeate !== null) {
+                // do anything if user post new password and repeate password
 
-            var_dump($data_konstumer);
+                if ($new_password == $new_password_repeate) {
+                    // action for changin password fucking user wkwkkw
+                    $data_konstumer = $this->konsumenModel->getResetPassword($hash);
+
+                    $this->konsumenModel->changePassword($hash, $new_password);
+
+                    redirect('home', 'refresh');
+
+                } else {
+                    $this->blade->view('recovery_password', $this->data);
+                }
+            } else {
+                $this->blade->view('recovery_password', $this->data);
+            }
         }
+        // go back to home
+        redirect('home', 'refresh');
     }
 
     public function lupapassword()
@@ -129,9 +149,8 @@ class Home extends Frontend
                 $this->data["email_not_exists"] = "Email tidak ditemukan !";
             }
 
-        } else {
-            $this->blade->view("forgotpassword", $this->data);
         }
+        $this->blade->view("forgotpassword", $this->data);
     }
 
     private function randomPassword()
