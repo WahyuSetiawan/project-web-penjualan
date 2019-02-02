@@ -1,1 +1,0 @@
-1. update composer detail server
