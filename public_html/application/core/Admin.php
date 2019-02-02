@@ -9,11 +9,15 @@ class Admin extends MY_Controller
     {
         parent::__construct();
         $this->data['flashdata'] = $this->session;
+
+        if ($this->session->userdata("id_admin") ===null) {
+            $this->login();
+        }
     }
 
-    public function index()
+    public function login()
     {
-
+        redirect('admin/login', 'refresh');
     }
 
     public function upload($_nama_file, $files = false)
