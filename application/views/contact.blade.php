@@ -1,0 +1,1 @@
+@extends('part/template', $head)

@@ -1,0 +1,6 @@
+<?php $__env->startSection('content'); ?>
+<div class="au-card-inner">
+	<h3 class="title-2">Selamat Datang Dihalaman Admin</h3>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
