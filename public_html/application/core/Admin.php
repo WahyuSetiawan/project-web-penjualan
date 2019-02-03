@@ -5,12 +5,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Admin extends MY_Controller
 {
 
+    public $path_image = "uploads/";
+
     public function __construct()
     {
         parent::__construct();
         $this->data['flashdata'] = $this->session;
 
-        if ($this->session->userdata("id_admin") ===null) {
+        if ($this->session->userdata("id_admin") === null) {
             $this->login();
         }
     }
@@ -20,12 +22,12 @@ class Admin extends MY_Controller
         redirect('admin/login', 'refresh');
     }
 
-    public function upload($_nama_file, $files = false)
+    public function upload($path, $_nama_file, $files = false)
     {
         $this->load->library('upload');
         $this->load->library('image_lib');
 
-        $config['upload_path'] = './uploads/'; //path folder
+        $config['upload_path'] = $path; //path folder
         $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
         $config['max_size'] = '2048'; //maksimum besar file 2M
         $config['max_width'] = '3000'; //lebar maksimum 1288 px

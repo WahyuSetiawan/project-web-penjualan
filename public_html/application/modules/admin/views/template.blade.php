@@ -47,6 +47,12 @@
 
     <meta name="base_url_controller" content="{{ current_url() }}">
     <meta name="base_url" content="{{ base_url() }}">
+
+    <style>
+        li.has-sub ul li.active{
+            /* color: #4272d7; */
+        }
+        </style>
 </head>
 
 <body class="animsition">
@@ -153,10 +159,13 @@
 
     <script>
         $(document).ready(function () {
-            var a = ".navbar__list .has-sub a[href='" + $("meta[name='base_url_controller']").attr(
-                'content').replace("index.php/", '') + "']";
+            var base_url = $("meta[name='base_url_controller']").attr(
+                'content').replace("index.php/", '');
 
+            var a = ".navbar__list .has-sub a[href='" + base_url + "']";
             $(a).parents(".has-sub").addClass('active');
+            $("a[href='" + base_url + "']").parent().addClass("active").addClass("has-sub");
+            $(".navbar__list .has-sub.active .js-arrow").click();
         });
     </script>
 

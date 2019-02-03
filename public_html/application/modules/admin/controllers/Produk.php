@@ -34,6 +34,8 @@ class Produk extends Admin
 
     public function simpan()
     {
+        $this->db->trans();
+
         $data = array();
         $filesCount = count($_FILES['gambar_tambahan']['name']);
         // var_dump($filesCount);die()
@@ -93,13 +95,27 @@ class Produk extends Admin
             }
         }
 
-        redirect('produk', 'refresh');
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status()) {
+            $this->session->set_flashdata('insert_produk_success', 'Berhasil menambahkan data produk baru');
+            redirect('produk', 'refresh');
+        } else {
+            $this->session->set_flashdata('insert_produk_failed', 'Tidak berhasil menambahkan data produk baru ');
+            redirect('produk/add', 'refresh');
+        }
     }
 
     public function ubah($id_produk)
     {
         $this->db->trans_begin();
 
+        /*
+
+        prepare variable to change produk method
+        must prepare because the method is to tricky
+
+         */
         $gambar_tambahan = $this->convertFilesArray($_FILES['gambar_tambahan']);
 
         $tmp_pic_last = $this->input->post('pic_last');
@@ -107,6 +123,13 @@ class Produk extends Admin
         $tmp_kategori_last = $this->input->post("last_kategori");
 
         $last_data = $this->produkModel->get($id_produk);
+
+        /*
+
+        insert data utama produk kedalam database
+        hal ini dilakukan untuk  mendapatkan data utama dari data produk
+
+         */
 
         $namafile_gambar_utama_ubah = "file_u_" . time() . ".jpg";
 
@@ -130,6 +153,13 @@ class Produk extends Admin
 
         $this->produkModel->put($id_produk, $data_produk);
 
+        /*
+
+        boom method yang paling tidak mengasikan
+        merubah multi karegori di dalam database
+
+         */
+
         if ($this->input->post('kategori')) {
             foreach ($this->input->post('kategori') as $key => $value) {
                 if (isset($tmp_kategori_last[$key])) {
@@ -141,8 +171,14 @@ class Produk extends Admin
                     ]);
                 }
             }
-
         }
+
+        /*
+
+        method menghapus semua data kategori yang
+        tidak diperlukan dari detail kategori dan produk
+
+        */
 
         if (isset($tmp_kategori_last)) {
             foreach ($tmp_kategori_last as $key => $value) {
@@ -150,14 +186,21 @@ class Produk extends Admin
             }
         }
 
+        /*
+
+        merubah data gambar tambahan produk
+        sangat tricky/rummit jadi perlajari dengan baik
+
+         */
+
         foreach ($gambar_tambahan as $key => $value) {
             if (isset($tmp_pic_last[$key])) {
                 $nmfile = "file_" . time() . $key . ".jpg";
 
-                if ($this->upload($nmfile, $value)) {
+                if ($this->upload("./" . $this->path_image, $nmfile, $value)) {
                     $data_update_image = [
                         "id_produk" => $id_produk,
-                        "path" => "uploads/" . $nmfile,
+                        "path" => $this->path_image . $nmfile,
                     ];
 
                     $this->gambarProdukModel->put($key, $data_update_image);
@@ -165,10 +208,10 @@ class Produk extends Admin
             } else {
                 $nmfile = "file_" . time() . $key . ".jpg";
 
-                if ($this->upload($nmfile, $value)) {
+                if ($this->upload("./" . $this->path_image, $nmfile, $value)) {
                     $data_update_image = [
                         "id_produk" => $id_produk,
-                        "path" => "uploads/" . $nmfile,
+                        "path" => $this->path_image . $nmfile,
                     ];
 
                     $this->gambarProdukModel->set($data_update_image);
@@ -185,13 +228,23 @@ class Produk extends Admin
             }
         }
 
+        /*
+
+        menyelesaikan langkah change produk dengan complete transaction
+
+         */
+
         $this->db->trans_complete();
 
         if ($this->db->trans_status()) {
             $this->db->trans_commit();
+            $this->session->set_flashdata('update_produk_success', 'Berhasil menamambahkan data baru');
+
             redirect('produk');
         } else {
             $this->db->trans_rollback();
+            $this->session->set_flashdata('update_produk_failes', 'Tidak berhasil mengubah data baru');
+
             redirect('produk/edit/' . $id_produk);
         }
     }

@@ -1,9 +1,8 @@
-@extends('template')
-@section("content")
+<?php $__env->startSection("content"); ?>
 <div class="au-card recent-report">
 
 	<div class="au-card-inner">
-		<h3 class="title-5 m-b-35">@if (isset($produk)) Ubah Data Produk @else Tambah Data Produk @endif
+		<h3 class="title-5 m-b-35"><?php if(isset($produk)): ?> Ubah Data Produk <?php else: ?> Tambah Data Produk <?php endif; ?>
 		</h3>
 
 		<form action="<?php	if (isset($produk)) {echo base_url('admin/produk/ubah/'.$produk->id_produk); } else { echo
@@ -14,21 +13,21 @@
 			<div class="form-group form-float">
 				<div class="form-line">
 					<label class="form-label">Nama Produk</label>
-					<input type="text" class="form-control" name="nama" required value="{{(isset($produk->nama_produk))? $produk->nama_produk: ""}}">
+					<input type="text" class="form-control" name="nama" required value="<?php echo e((isset($produk->nama_produk))? $produk->nama_produk: ""); ?>">
 				</div>
 			</div>
 
-			@foreach ($produk->kategori as $item)
-			<input type="hidden" name="last_kategori[{{$item->id_kategori}}]" value="{{$item->id_detail_kategori}}" />
-			@endforeach
+			<?php foreach($produk->kategori as $item): ?>
+			<input type="hidden" name="last_kategori[<?php echo e($item->id_kategori); ?>]" value="<?php echo e($item->id_detail_kategori); ?>" />
+			<?php endforeach; ?>
 
 			<div>
 				<div>
 					<label>Kategori Model</label>
 					<div>
 						<?php foreach ($kategori as $key => $value) { ?>
-						<input type="checkbox" name="kategori[{{$value->id_kategori}}]"
-						 {{isset($produk->kategori[$value->id_kategori])? "checked":""}}> {{{$value->nama_kategori}}} <br>
+						<input type="checkbox" name="kategori[<?php echo e($value->id_kategori); ?>]"
+						 <?php echo e(isset($produk->kategori[$value->id_kategori])? "checked":""); ?>> <?php echo e($value->nama_kategori); ?> <br>
 						<?php } ?>
 					</div>
 				</div>
@@ -37,8 +36,8 @@
 			<div class="form-group form-float">
 				<div class="form-line">
 					<label class="form-label">Harga : Rp.</label>
-					<input type="number" min="1" max="1000000000" class="form-control" name="harga" required value="{{(isset($produk->harga_produk))? $produk->harga_produk: "
-					 "}}">
+					<input type="number" min="1" max="1000000000" class="form-control" name="harga" required value="<?php echo e((isset($produk->harga_produk))? $produk->harga_produk: "
+					 "); ?>">
 				</div>
 			</div>
 
@@ -52,7 +51,7 @@
 			<div class="form-group form-float">
 				<div class="form-line">
 					<label class="form-label">Deskripsi Produk</label>
-					<textarea name="deskripsi" cols="30" rows="5" class="form-control no-resize" required>{{(isset($produk->deskripsi_produk))? $produk->deskripsi_produk: ""}}</textarea>
+					<textarea name="deskripsi" cols="30" rows="5" class="form-control no-resize" required><?php echo e((isset($produk->deskripsi_produk))? $produk->deskripsi_produk: ""); ?></textarea>
 				</div>
 			</div>
 
@@ -85,26 +84,26 @@
 					</tr>
 				</thead>
 
-				@if (isset($produk->gambar_lain)) @foreach ($produk->gambar_lain as $key => $value)
-				<input type="hidden" name="pic_last_tmp[{{$value->id_gambar_produk}}]" value="{{$value->path}}" />
-				@endforeach @endif
+				<?php if(isset($produk->gambar_lain)): ?> <?php foreach($produk->gambar_lain as $key => $value): ?>
+				<input type="hidden" name="pic_last_tmp[<?php echo e($value->id_gambar_produk); ?>]" value="<?php echo e($value->path); ?>" />
+				<?php endforeach; ?> <?php endif; ?>
 
 				<tbody id="TextBoxContainer">
-					@if (isset($produk->gambar_lain)) @foreach ($produk->gambar_lain as $key => $value)
+					<?php if(isset($produk->gambar_lain)): ?> <?php foreach($produk->gambar_lain as $key => $value): ?>
 					<tr>
 						<td>
-							<input type="file" class="form-control" name="gambar_tambahan[{{$value->id_gambar_produk}}]" data-idgambar="{{$value->id_gambar_produk}}">
-							<input type="hidden" name="pic_last[{{$value->id_gambar_produk}}]" value="{{$value->path}}" />
+							<input type="file" class="form-control" name="gambar_tambahan[<?php echo e($value->id_gambar_produk); ?>]" data-idgambar="<?php echo e($value->id_gambar_produk); ?>">
+							<input type="hidden" name="pic_last[<?php echo e($value->id_gambar_produk); ?>]" value="<?php echo e($value->path); ?>" />
 						</td>
 						<td>
-							<img src="{{base_url($value->path)}}" alt="your" class="img img-loader" data-idgambar="{{$value->id_gambar_produk}}"
+							<img src="<?php echo e(base_url($value->path)); ?>" alt="your" class="img img-loader" data-idgambar="<?php echo e($value->id_gambar_produk); ?>"
 							 style="-o-object-fit: none; object-fit: cover;$produk\ width:200px;height:200px;" />
 						</td>
 						<td>
-							<button type="button" class="btn btn-danger img-remove" data-idgambar="{{$value->id_gambar_produk}}"><i class="glyphicon glyphicon-remove-sign"></i></button>
+							<button type="button" class="btn btn-danger img-remove" data-idgambar="<?php echo e($value->id_gambar_produk); ?>"><i class="glyphicon glyphicon-remove-sign"></i></button>
 						</td>
 					</tr>
-					@endforeach @endif
+					<?php endforeach; ?> <?php endif; ?>
 				</tbody>
 
 				<tbody>
@@ -128,7 +127,7 @@
 				<input type="file" class="form-control" name="gambar_tambahan[]" required>
 			</td>
 			<td>
-				<img data-idgambar="" src="{{base_url('/assets/assets_public/image/180x180px.png')}}" class="img img-loader" alt="your image"
+				<img data-idgambar="" src="<?php echo e(base_url('/assets/assets_public/image/180x180px.png')); ?>" class="img img-loader" alt="your image"
 				 style="-o-object-fit: none; object-fit: cover;$produk\ width:200px;height:200px;" />
 			</td>
 			<td>
@@ -137,9 +136,9 @@
 		</tr>
 	</tbody>
 </table>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
+<?php $__env->startSection('js'); ?>
 <script type="text/javascript">
 	var template_image = $('#template_image');
 	var container = $('#TextBoxContainer');
@@ -150,6 +149,7 @@
 	$(document).on("click", ".img-remove",
 		function () {
 			var index = $(this).data("idgambar");
+
 			$(this).parent().parent().remove();
 		});
 
@@ -237,4 +237,5 @@
 	// 		'<td><button type="button" class="btn btn-danger remove"><i class="glyphicon glyphicon-remove-sign"></i></button></td>';
 	// }
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
