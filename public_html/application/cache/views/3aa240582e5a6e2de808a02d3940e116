@@ -149,7 +149,6 @@
 	$(document).on("click", ".img-remove",
 		function () {
 			var index = $(this).data("idgambar");
-
 			$(this).parent().parent().remove();
 		});
 

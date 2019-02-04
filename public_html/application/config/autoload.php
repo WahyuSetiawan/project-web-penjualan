@@ -144,5 +144,6 @@ $autoload['model'] = array(
     'pesananModel',
     "viewStokModel",
     'detailKategoriModel',
-    'gambarProdukModel'
+    'gambarProdukModel',
+    'carousellModel'
 );
