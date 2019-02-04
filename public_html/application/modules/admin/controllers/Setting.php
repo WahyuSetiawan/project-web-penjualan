@@ -37,80 +37,87 @@ class Setting extends Admin
 
     public function carousell()
     {
-        echo "<pre>";
+$this->db->trans_begin();
         /*
 
         persiapan variable yang akan digunakan untuk penyimpanan carousell ke dalam database
 
          */
 
-        $files_new = $_FILES["file_new"];
-        $files_new = $this->convertFilesArray($files_new);
-        $title_new = $this->input->post("title_new");
-        $sub_title_new = $this->input->post("sub_title_new");
-        $content = $this->input->post("content_new");
-
         $path = $this->path_image . "/carousell/";
-
-        $files_old = $_FILES['file'];
-        $files_old = $this->convertFilesArray($files_old);
-        $title = $this->input->post("title");
-        $sub_title = $this->input->post("sub_title");
-        $content = $this->input->post("content");
 
         $old_data_carousel = $this->carousellModel->get();
 
-        var_dump($title);
+        if (isset($_FILES["file_new"])) {
 
-        /*
+            $files_new = $_FILES["file_new"];
+            $files_new = $this->convertFilesArray($files_new);
+            $title_new = $this->input->post("title_new");
+            $sub_title_new = $this->input->post("sub_title_new");
+            $content_new = $this->input->post("content_new");
 
-        convert variable to insert or update method
+            /*
 
-         */
+            convert variable to insert or update method
 
-        foreach ($files_new as $key => $files) {
-            $nama_file = "carousell_" . time() . $key . ".jpg";
+             */
 
-            // if ($this->upload($path, $nama_file, $files)) {
-            //     $data = [
-            //         "title" => $title_new[$key],
-            //         "sub_title" => $sub_title_new[$key],
-            //         "content" => $content[$key],
-            //         "img" => $path. $nama_file
-            //     ];
+            foreach ($files_new as $key => $files) {
+                $nama_file = "carousell_" . time() . $key . ".jpg";
 
-            //  var_dump($data);
+                if ($this->upload($path, $nama_file, $files)) {
+                    $data = [
+                        "title" => $title_new[$key],
+                        "sub_title" => $sub_title_new[$key],
+                        "content" => $content_new[$key],
+                        "img" => $path . $nama_file,
+                    ];
 
-            //     // $this->carousellModel->set($data);
-            // } else {
+                    var_dump($data);
 
-            // }
-        }
-
-        foreach ($old_data_carousel as $key => $value) {
-            if (isset($title[$value->id_carousell])) {
-                $data = [
-                    "title" => $title[$value->id_carousell],
-                    "sub_title" => $sub_title[$value->id_carousell],
-                    "content" => $content[$value->id_carousell],
-                ];
-
-                if ($files_old[$value->id_carousell]["tmp_name"] == "") {
-                    $data['img'] = $value->img;
+                    $this->carousellModel->set($data);
                 } else {
-                    $nama_file = "carousell_" . time() . $key . ".jpg";
-
-                    if ($this->upload("./" . $path, $nama_file, $files_old[$value->id_carousell])) {
-
-                    }
 
                 }
-            } else {
-                echo "tidak tersedia";
             }
         }
 
-        // redirect('admin/setting','refresh');
+        if (isset($_FILES['file'])) {
+            $files_old = $_FILES['file'];
+            $files_old = $this->convertFilesArray($files_old);
+            $title = $this->input->post("title");
+            $sub_title = $this->input->post("sub_title");
+            $content = $this->input->post("content");
 
+            foreach ($old_data_carousel as $key => $value) {
+                if (isset($title[$value->id_carousell])) {
+                    $data = [
+                        "title" => $title[$value->id_carousell],
+                        "sub_title" => $sub_title[$value->id_carousell],
+                        "content" => $content[$value->id_carousell],
+                    ];
+
+                    if ($files_old[$value->id_carousell]["tmp_name"] == "") {
+                        $data['img'] = $value->img;
+                    } else {
+                        $nama_file = "carousell_" . time() . $key . ".jpg";
+
+                        if ($this->upload("./" . $path, $nama_file, $files_old[$value->id_carousell])) {
+                            $data['img'] = $path . $nama_file;
+                        }
+                    }
+
+                    $this->carousellModel->put($value->id_carousell, $data);
+                } else {
+                    $this->carousellModel->del($value->id_carousell);
+                }
+            }
+        }
+
+        $this->db->trans_complete();
+
+        if($this->db->trans_status()){
+            redirect('admin/setting','refresh');
+        }
     }
 }

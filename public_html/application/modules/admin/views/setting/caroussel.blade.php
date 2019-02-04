@@ -9,12 +9,16 @@
                     <div class="col-lg-12">
                         <div class="default-tab">
                             <nav>
+                                <?php $active = " active";?>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-
                                     @foreach ($carousell as $item)
-                                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-carousell-{{$item->id_carousell}}"
+                                    <a class="nav-item nav-link {{$active}}" id="nav-home-tab" data-toggle="tab" href="#nav-carousell-{{$item->id_carousell}}"
                                         role="tab" aria-controls="nav-carousell-{{$item->id_carousell}}" aria-selected="true">{{$item->title}}
                                         <i class="fa tab_carousell_close fa-close"></i></a>
+
+                                    <?php if ($active != "") {
+                                        $active = "";
+                                    } ?>
                                     @endforeach
 
                                     <a class="nav-item nav-link nav-add-contact" data-toggle="tab" href="#nav-contact"
@@ -24,9 +28,10 @@
                                 </div>
                             </nav>
                             <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+                                <?php $active = " active";?>
                                 @foreach ($carousell as $item)
-                                <div class="tab-pane fade show active" id="nav-carousell-{{$item->id_carousell}}" role="tabpanel"
-                                    aria-labelledby="nav-home-tab">
+                                <div class="tab-pane fade show {{$active}}" id="nav-carousell-{{$item->id_carousell}}"
+                                    role="tabpanel" aria-labelledby="nav-home-tab">
                                     <div class="row">
                                         <div class="col col-md-4">
                                             <img class="img-preview" src="{{base_url($item->img)}}" data-index="{{$item->id_carousell}}">
@@ -79,6 +84,11 @@
                                         </div>
                                     </div>
                                 </div>
+
+
+                                <?php if ($active != "") {
+                                    $active = "";
+                                } ?>
                                 @endforeach
 
 
@@ -104,9 +114,8 @@
 </form>
 
 <div id="template-tab-carousell" style="display: none">
-<a class="nav-item nav-link" data-toggle="tab" href="" role="tab" aria-controls=""
-    aria-selected="false"><i class="fa fa-plus">
-    </i></a>
+    <a class="nav-item nav-link" data-toggle="tab" href="" role="tab" aria-controls="" aria-selected="false"><i class="fa fa-plus">
+        </i></a>
 </div>
 
 <div id="template_tab_carousell_content" style="display: none">

@@ -71,16 +71,18 @@
     template_carousell_clone.find(".nav-item").attr("aria-controls", id_template);
     template_carousell_clone.find(".nav-item").html("New Carousell" +
       ' <i class="fa tab_carousell_close fa-close"></i>');
-    template_carousell_clone.find(".nav-item").addClass("active");
 
     var template_content_tab = $("#template_tab_carousell_content");
     var template_content_tab_clone = template_content_tab.clone();
 
     template_content_tab_clone.find(".tab-pane").attr("id", id_template);
-    template_content_tab_clone.find(".tab-pane").addClass("active");
+
 
     $(".nav-item").removeClass("active");
     $(".tab-pane").removeClass("active");
+
+    template_carousell_clone.find(".nav-item").addClass("active");
+    template_content_tab_clone.find(".tab-pane").addClass("active");
 
     $("#nav-tab").append(template_carousell_clone.html());
     $("#nav-tab").append(current.clone());
