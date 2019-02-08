@@ -7,6 +7,7 @@ class Home extends Frontend
     public function index()
     {
         $this->data['produk'] = $this->produkModel->get();
+        $this->data['carousell'] =$this->carousellModel->get();
 
         $this->blade->view("homepage", $this->data);
     }
@@ -17,7 +18,9 @@ class Home extends Frontend
         $this->data['related'] = $this->viewStokModel->get(false, 6, false, [], ['rand()']);
 
         $page = $this->uri->segment(3);
+
         $limit = 12;
+        
         if (!$page):
             $offset = 0;
         else:
@@ -40,7 +43,9 @@ class Home extends Frontend
         $this->data['related'] = $this->produkModel->get(false, 6, false, [], ['rand()']);
 
         $page = $this->uri->segment(4);
+
         $limit = 12;
+        
         if (!$page):
             $offset = 0;
         else:
@@ -85,7 +90,6 @@ class Home extends Frontend
         if ($hash !== false) {
             if ($new_password !== null && $new_password_repeate !== null) {
                 // do anything if user post new password and repeate password
-
                 if ($new_password == $new_password_repeate) {
                     // action for changin password fucking user wkwkkw
                     $data_konstumer = $this->konsumenModel->getResetPassword($hash);

@@ -4,47 +4,28 @@
 <!-- ============================================= -->
 <section id="hero" class="hero hero-3">
 	<div id="hero-slider" class="hero-slider">
-		<!-- Slide #1 -->
-		<div class="slide bg-overlay">
-			<div class="bg-section">
-				<img src="<?php echo base_url('assets/public') ?>/assets/images/sliders/4.jpg" alt="Background" />
-			</div>
-			<div class="container vertical-center">
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
-						<div class="slide-content">
-							<div class="slide-heading"> The Best Theme For Auto Shops </div>
-							<div class="slide-title">
-								<h2>Say Hello To <span class="color-theme">Car Shop !</span></h2>
-							</div>
-							<div class="slide-desc"> Car Shop is a business theme. Perfectly suited for Auto Mechanic, Car Repair Shops, Car
-								Wash, Garages, Automobile Mechanicals, Mechanic Workshops, Auto Painting, Auto Centres. </div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 
+		<?php foreach($carousell as $item): ?>
 		<!-- Slide #1 -->
 		<div class="slide bg-overlay">
 			<div class="bg-section">
-				<img src="assets/images/sliders/4.jpg" alt="Background" />
+				<img src="<?php echo base_url($item->img) ?>" alt="Background" />
 			</div>
 			<div class="container vertical-center">
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
 						<div class="slide-content">
-							<div class="slide-heading"> The Best Theme For Auto Shops </div>
+							<div class="slide-heading"> <?php echo e($item->sub_title); ?> </div>
 							<div class="slide-title">
-								<h2>Say Hello To <span class="color-theme">Car Shop !</span></h2>
+								<h2><?php echo e($item->title); ?></span></h2>
 							</div>
-							<div class="slide-desc"> Car Shop is a business theme. Perfectly suited for Auto Mechanic, Car Repair Shops, Car
-								Wash, Garages, Automobile Mechanicals, Mechanic Workshops, Auto Painting, Auto Centres. </div>
+							<div class="slide-desc"> <?php echo e($item->content); ?> </div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<?php endforeach; ?>
 	</div>
 	<!-- #hero-slider end -->
 </section>

@@ -5,18 +5,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Frontend extends MY_Controller
 {
 
-    
     public function __construct()
     {
         parent::__construct();
 
         $this->load->model('kategoriModel');
-        
+
+        $data_setting = $this->settingModel->get();
+
+        foreach ($data_setting as $key => $value) {
+            $this->data['head']['set'][$value->setting] = $value->value;
+        }
+
         $this->data['head']['kategori'] = $this->kategoriModel->get();
         $this->data['head']['cart'] = $this->cart;
         $this->data['flashdata'] = $this->session;
     }
-    
 
     public function index()
     {

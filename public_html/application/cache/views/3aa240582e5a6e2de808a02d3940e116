@@ -17,9 +17,11 @@
 				</div>
 			</div>
 
+			<?php if(isset($produk)): ?>
 			<?php foreach($produk->kategori as $item): ?>
 			<input type="hidden" name="last_kategori[<?php echo e($item->id_kategori); ?>]" value="<?php echo e($item->id_detail_kategori); ?>" />
 			<?php endforeach; ?>
+			<?php endif; ?>
 
 			<div>
 				<div>
@@ -59,7 +61,7 @@
 			<table class="table table-striped" style="border: none !important;">
 				<thead>
 					<tr>
-						<td>Tambah Gambar Pendukung</td>
+						<td>Tambah Gambar Utama</td>
 						<td>Image</td>
 					</tr>
 				</thead>

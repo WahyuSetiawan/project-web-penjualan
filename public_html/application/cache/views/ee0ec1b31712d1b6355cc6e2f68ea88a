@@ -112,7 +112,9 @@ penutup dari modal constumer sign in dan register
 					<span class="icon-bar"></span>
 				</button>
 				<a class="logo" href="<?php echo e(base_url()); ?>">
-					<img src="<?php echo e(base_url('assets/public')); ?>/assets/images/logo/logo-light.png" alt="Autoshop">
+					<?php $logo = base_url( (isset($set['logo'])) ? $set['logo']: "/assets/images/logo/logo-light.png") 	 ?>
+
+					<img src="<?php echo e($logo); ?>" alt="Autoshop" style="height: 100px">
 				</a>
 			</div>
 

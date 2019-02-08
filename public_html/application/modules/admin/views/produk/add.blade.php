@@ -18,9 +18,11 @@
 				</div>
 			</div>
 
+			@if (isset($produk))
 			@foreach ($produk->kategori as $item)
 			<input type="hidden" name="last_kategori[{{$item->id_kategori}}]" value="{{$item->id_detail_kategori}}" />
 			@endforeach
+			@endif
 
 			<div>
 				<div>
@@ -60,7 +62,7 @@
 			<table class="table table-striped" style="border: none !important;">
 				<thead>
 					<tr>
-						<td>Tambah Gambar Pendukung</td>
+						<td>Tambah Gambar Utama</td>
 						<td>Image</td>
 					</tr>
 				</thead>
