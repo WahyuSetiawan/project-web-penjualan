@@ -23,7 +23,7 @@
             <th>Kategori</th>
             <th>Harga Produk</th>
             <th>Stok Produk</th>
-            <th></th>
+            <th>Aksi</th>
           </tr>
         </thead>
         <tbody>

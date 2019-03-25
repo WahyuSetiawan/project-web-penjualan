@@ -8,13 +8,13 @@
 
 		<form action="<?php	if (isset($produk)) {echo base_url('admin/produk/ubah/'.$produk->id_produk); } else { echo
 		 base_url("
-		 admin/produk/simpan"); } ?>" id="form_validation" method="POST"
-			enctype="multipart/form-data">
+		 admin/produk/simpan"); } ?>" id="form_validation" method="POST" enctype="multipart/form-data">
 
 			<div class="form-group form-float">
 				<div class="form-line">
 					<label class="form-label">Nama Produk</label>
-					<input type="text" class="form-control" name="nama" required value="{{(isset($produk->nama_produk))? $produk->nama_produk: ""}}">
+					<input type="text" class="form-control" name="nama" required
+						value="{{(isset($produk->nama_produk))? $produk->nama_produk: ""}}">
 				</div>
 			</div>
 
@@ -30,7 +30,8 @@
 					<div>
 						<?php foreach ($kategori as $key => $value) { ?>
 						<input type="checkbox" name="kategori[{{$value->id_kategori}}]"
-						 {{isset($produk->kategori[$value->id_kategori])? "checked":""}}> {{{$value->nama_kategori}}} <br>
+							{{isset($produk->kategori[$value->id_kategori])? "checked":""}}> {{{$value->nama_kategori}}}
+						<br>
 						<?php } ?>
 					</div>
 				</div>
@@ -54,7 +55,8 @@
 			<div class="form-group form-float">
 				<div class="form-line">
 					<label class="form-label">Deskripsi Produk</label>
-					<textarea name="deskripsi" cols="30" rows="5" class="form-control no-resize" required>{{(isset($produk->deskripsi_produk))? $produk->deskripsi_produk: ""}}</textarea>
+					<textarea name="deskripsi" cols="30" rows="5" class="form-control no-resize"
+						required>{{(isset($produk->deskripsi_produk))? $produk->deskripsi_produk: ""}}</textarea>
 				</div>
 			</div>
 
@@ -70,14 +72,13 @@
 					<td><input type='file' class="form-control" name="gambar_utama"></td>
 					<td>
 						<img src="<?Php
-							if (isset($produk->gambar_utama) && $produk->gambar_utama != "
-						 ") {
+							if (isset($produk->gambar_utama) && $produk->gambar_utama != " ") {
 								echo base_url($produk->gambar_utama);
 							} else {
 								echo base_url();
 							}	
-							?>"
-						 class="img img-loader-utama" style="-o-object-fit: none; object-fit: cover;$produk\ width:200px;height:200px;" />
+							?>" class="img img-loader-utama"
+							style="-o-object-fit: none; object-fit: cover;$produk\ width:200px;height:200px;" />
 					</td>
 				</tbody>
 				<thead>
@@ -95,15 +96,20 @@
 					@if (isset($produk->gambar_lain)) @foreach ($produk->gambar_lain as $key => $value)
 					<tr>
 						<td>
-							<input type="file" class="form-control" name="gambar_tambahan[{{$value->id_gambar_produk}}]" data-idgambar="{{$value->id_gambar_produk}}">
-							<input type="hidden" name="pic_last[{{$value->id_gambar_produk}}]" value="{{$value->path}}" />
+							<input type="file" class="form-control" name="gambar_tambahan[{{$value->id_gambar_produk}}]"
+								data-idgambar="{{$value->id_gambar_produk}}">
+							<input type="hidden" name="pic_last[{{$value->id_gambar_produk}}]"
+								value="{{$value->path}}" />
 						</td>
 						<td>
-							<img src="{{base_url($value->path)}}" alt="your" class="img img-loader" data-idgambar="{{$value->id_gambar_produk}}"
-							 style="-o-object-fit: none; object-fit: cover;$produk\ width:200px;height:200px;" />
+							<img src="{{base_url($value->path)}}" alt="your" class="img img-loader"
+								data-idgambar="{{$value->id_gambar_produk}}"
+								style="-o-object-fit: none; object-fit: cover;$produk\ width:200px;height:200px;" />
 						</td>
 						<td>
-							<button type="button" class="btn btn-danger img-remove" data-idgambar="{{$value->id_gambar_produk}}"><i class="glyphicon glyphicon-remove-sign"></i></button>
+							<button type="button" class="btn btn-danger img-remove"
+								data-idgambar="{{$value->id_gambar_produk}}"><i
+									class="glyphicon glyphicon-remove-sign"></i></button>
 						</td>
 					</tr>
 					@endforeach @endif
@@ -112,8 +118,9 @@
 				<tbody>
 					<tr>
 						<th colspan="5">
-							<button id="btnAdd" type="button" class="btn btn-primary btn-sm btn-add-image" data-toggle="tooltip"
-							 data-original-title="Add more controls"><i class="glyphicon glyphicon-plus-sign"></i>&nbsp; Tambah Foto&nbsp;</button>
+							<button id="btnAdd" type="button" class="btn btn-primary btn-sm btn-add-image"
+								data-toggle="tooltip" data-original-title="Add more controls"><i
+									class="glyphicon glyphicon-plus-sign"></i>&nbsp; Tambah Foto&nbsp;</button>
 						</th>
 					</tr>
 				</tbody>
@@ -130,11 +137,13 @@
 				<input type="file" class="form-control" name="gambar_tambahan[]" required>
 			</td>
 			<td>
-				<img data-idgambar="" src="{{base_url('/assets/assets_public/image/180x180px.png')}}" class="img img-loader" alt="your image"
-				 style="-o-object-fit: none; object-fit: cover;$produk\ width:200px;height:200px;" />
+				<img data-idgambar="" src="{{base_url('/assets/assets_public/image/180x180px.png')}}"
+					class="img img-loader" alt="your image"
+					style="-o-object-fit: none; object-fit: cover;$produk\ width:200px;height:200px;" />
 			</td>
 			<td>
-				<button type="button" class="btn btn-danger img-remove" data-idgambar=""><i class="glyphicon glyphicon-remove-sign"></i></button>
+				<button type="button" class="btn btn-danger img-remove" data-idgambar=""><i
+						class="glyphicon glyphicon-remove-sign"></i></button>
 			</td>
 		</tr>
 	</tbody>
