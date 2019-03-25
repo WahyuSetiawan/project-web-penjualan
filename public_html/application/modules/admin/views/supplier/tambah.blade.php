@@ -13,21 +13,21 @@
             <div class="form-group form-float">
                 <div class="form-line">
                     <label class="form-label">Nama</label>
-                    <input type="text" class="form-control" name="nama" required value="{{(isset($supplier))?$supplier->nama:""}}">
+                    <input placeholder="Alias..." type="text" class="form-control" name="nama" required value="{{(isset($supplier))?$supplier->nama:""}}">
                 </div>
             </div>
 
             <div class="form-group form-float">
                 <div class="form-line">
                     <label class="form-label">Alamat</label>
-                    <input type="text" class="form-control" name="alamat" required value="{{(isset($supplier))? $supplier->alamat:""}}">
+                    <input type="text" placeholder="Jalan contoh RT.00..." class="form-control" name="alamat" required value="{{(isset($supplier))? $supplier->alamat:""}}">
                 </div>
             </div>
 
             <div class="form-group form-float">
                 <div class="form-line">
                     <label class="form-label">Telepon</label>
-                    <input type="text" class="form-control" name="telepon" required value="{{(isset($supplier))?$supplier->telepon:""}}">
+                    <input type="text" class="form-control" placeholder="0844323...." name="telepon" required value="{{(isset($supplier))?$supplier->telepon:""}}">
                 </div>
             </div>
 

@@ -16,7 +16,7 @@
      <th>Nama Konsumen</th>
      <th>Email konsumen</th>
      <th>No hp Konsumen</th>
-     <th></th>
+     <th>Aksi</th>
    </tr>
  </thead>
  <tbody>
