@@ -1,4 +1,9 @@
 @extends('template')
+
+@section('css')
+<link href="{{ base_url("assets/admin/css/slimselect.min.css") }}" rel="stylesheet" />
+@endsection
+
 @section("content")
 <div class="au-card recent-report">
 
@@ -6,9 +11,13 @@
 		<h3 class="title-5 m-b-35">@if (isset($produk)) Ubah Data Produk @else Tambah Data Produk @endif
 		</h3>
 
-		<form action="<?php	if (isset($produk)) {echo base_url('admin/produk/ubah/'.$produk->id_produk); } else { echo
-		 base_url("
-		 admin/produk/simpan"); } ?>" id="form_validation" method="POST" enctype="multipart/form-data">
+		<form action="<?php	
+		if (isset($produk)) {
+			echo base_url('admin/produk/ubah/'.$produk->id_produk); 
+		} else { 
+			echo base_url("admin/produk/simpan"); 
+			} 
+			?>" id="form_validation" method="POST" enctype="multipart/form-data">
 
 			<div class="form-group form-float">
 				<div class="form-line">
@@ -24,7 +33,7 @@
 			@endforeach
 			@endif
 
-			<div>
+			<div class="from-group from-float">
 				<div>
 					<label>Kategori Model</label>
 					<div>
@@ -38,20 +47,29 @@
 			</div>
 
 			<div class="form-group form-float">
-				<div class="form-line">
-					<label class="form-label">Harga : Rp.</label>
-					<input type="number" min="1" max="1000000000" class="form-control" name="harga" required value="{{(isset($produk->harga_produk))? $produk->harga_produk: "
-					 "}}">
-				</div>
+				<select id="kategori" multiple class="form-control">
+					<?php foreach ($kategori as $key => $value) { ?>
+					<option value="{{ $value->id_kategori}}">{{ $value->nama_kategori }}</option>
+					<?php } ?>
+				</select>
 			</div>
 
 			<div class="form-group form-float">
-				<label class="form-label">stok</label>
+				<div class="form-line">
+					<label class="form-label">Harga : Rp.</label>
+					<input type="number" min="1" max="1000000000" class="form-control" name="harga" required value="{{(isset($produk->harga_produk))? $produk->harga_produk: "
+					"}}">
+				</div>
+			</div>
+
+			{{-- <div class="form-group form-float">
+				<label class="form-label">Stok</label>
 				<select class="form-control" name="stok" required>
 					<option>Tersedia</option>
 					<option>Kosong</option>
 				</select>
-			</div>
+			</div> --}}
+
 			<div class="form-group form-float">
 				<div class="form-line">
 					<label class="form-label">Deskripsi Produk</label>
@@ -130,6 +148,7 @@
 		</form>
 	</div>
 </div>
+
 <table style="display: none">
 	<tbody id="template_image">
 		<tr>
@@ -151,6 +170,8 @@
 @endsection
 
 @section('js')
+<script src="{{ base_url("assets/admin/js/slimselect.min.js")}}" type="text/javascript"></script>
+
 <script type="text/javascript">
 	var template_image = $('#template_image');
 	var container = $('#TextBoxContainer');
@@ -215,7 +236,6 @@
 				reader.readAsDataURL(this.files[0]);
 			}
 		});
-
 
 
 	// $(function (a) {

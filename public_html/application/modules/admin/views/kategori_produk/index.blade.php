@@ -29,7 +29,7 @@
                         <td>
                             <?php echo $row->nama_kategori ?>
                         </td>
-                        <td>
+                        <td class="td-action">
                             <a class="btn btn-info btn-sm"
                                 href="<?php echo site_url('admin/kategori_produk/edit/'.$row->id_kategori) ?>">Edit</a>
                             <a class="btn btn-danger btn-sm"

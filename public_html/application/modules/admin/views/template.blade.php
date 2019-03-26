@@ -10,25 +10,27 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>Dashboard Admin</title>
 
     <!-- Fontfaces CSS-->
     <link href="<?php echo base_url('assets/admin') ?>/css/font-face.css" rel="stylesheet" media="all">
-    <link href="<?php echo base_url('assets/admin') ?>/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet"
-        media="all">
-    <link href="<?php echo base_url('assets/admin') ?>/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet"
-        media="all">
-    <link href="<?php echo base_url('assets/admin') ?>/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet"
-        media="all">
+    <link href="<?php echo base_url('assets/admin') ?>/vendor/font-awesome-4.7/css/font-awesome.min.css"
+        rel="stylesheet" media="all">
+    <link href="<?php echo base_url('assets/admin') ?>/vendor/font-awesome-5/css/fontawesome-all.min.css"
+        rel="stylesheet" media="all">
+    <link href="<?php echo base_url('assets/admin') ?>/vendor/mdi-font/css/material-design-iconic-font.min.css"
+        rel="stylesheet" media="all">
 
     <!-- Bootstrap CSS-->
-    <link href="<?php echo base_url('assets/admin') ?>/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="<?php echo base_url('assets/admin') ?>/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet"
+        media="all">
 
     <!-- Vendor CSS-->
     <link href="<?php echo base_url('assets/admin') ?>/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css"
         rel="stylesheet" media="all">
     <link href="<?php echo base_url('assets/admin') ?>/vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="<?php echo base_url('assets/admin') ?>/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="<?php echo base_url('assets/admin') ?>/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet"
+        media="all">
     <link href="<?php echo base_url('assets/admin') ?>/vendor/slick/slick.css" rel="stylesheet" media="all">
     <link href="<?php echo base_url('assets/admin') ?>/vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="<?php echo base_url('assets/admin') ?>/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet"
@@ -45,14 +47,21 @@
     {{-- <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script> --}}
 
+    @yield('css')
+
     <meta name="base_url_controller" content="{{ current_url() }}">
     <meta name="base_url" content="{{ base_url() }}">
 
     <style>
-        li.has-sub ul li.active{
+        li.has-sub ul li.active {
             /* color: #4272d7; */
         }
-        </style>
+
+        .td-action {
+            text-align: center;
+            width: 200px
+        }
+    </style>
 </head>
 
 <body class="animsition">

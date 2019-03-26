@@ -31,9 +31,9 @@
           <tr>
             <td> {{$row->nama_produk }} </td>
             <td> {{$row->nama_kategori }} </td>
-            <td> {{$row->harga_produk }} </td>
+            <td>Rp. {{$row->harga_produk }} </td>
             <td> {{$row->stok_produk }} </td>
-            <td>
+            <td class="td-action">
               <a href="{{ site_url('admin/produk/edit/'.$row->id_produk)}}"><button class="btn btn-info btn-sm">Edit</button></a>
               <a href="{{ site_url('admin/produk/hapus/'.$row->id_produk)}}" onclick="return confirm('Anda Yakin Ingin Menghapus ?')"><button
                   class="btn btn-danger btn-sm">Hapus</button></a>
