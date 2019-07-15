@@ -307,7 +307,7 @@ class Migration_admin extends CI_Migration
         );
 
         $this->dbforge->add_key('id', true);
-        $this->dbforge->create_table("tbl_setttings", true);
+        $this->dbforge->create_table("tbl_settings", true);
 
         $this->dbforge->add_field(
             array(
@@ -459,8 +459,8 @@ class Migration_admin extends CI_Migration
                 'tanggal' => array(
                     'type' => "datetime",
                 ),
-                "`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP",
-                "`updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP",
+                "`created_at` TIMESTAMP",
+                "`updated_at` TIMESTAMP",
                 "CONSTRAINT `FK_tbl_pembelian_tbl_produk` FOREIGN KEY (`id_produk`) REFERENCES `tbl_produk` (`id_produk`) ON UPDATE CASCADE",
                 "CONSTRAINT `FK_tbl_pembelian_tbl_supplier` FOREIGN KEY (`id_supplier`) REFERENCES `tbl_supplier` (`id_supplier`) ON UPDATE CASCADE",
             )

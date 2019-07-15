@@ -1,4 +1,4 @@
-@extends('template') 
+@extends('template')
 @section('content')
 <div class="au-card recent-report">
 
@@ -23,7 +23,7 @@
             <th>Kategori</th>
             <th>Harga Produk</th>
             <th>Stok Produk</th>
-            <th>Aksi</th>
+            <th style="text-align: center">Aksi</th>
           </tr>
         </thead>
         <tbody>
@@ -31,12 +31,16 @@
           <tr>
             <td> {{$row->nama_produk }} </td>
             <td> {{$row->nama_kategori }} </td>
-            <td>Rp. {{$row->harga_produk }} </td>
+            <td>Rp. {{ number_format($row->harga_produk,2,',','.')  }} </td>
             <td> {{$row->stok_produk }} </td>
-            <td class="td-action">
-              <a href="{{ site_url('admin/produk/edit/'.$row->id_produk)}}"><button class="btn btn-info btn-sm">Edit</button></a>
-              <a href="{{ site_url('admin/produk/hapus/'.$row->id_produk)}}" onclick="return confirm('Anda Yakin Ingin Menghapus ?')"><button
-                  class="btn btn-danger btn-sm">Hapus</button></a>
+            <td class="td-action" style=" width: 140px">
+              <a href="{{ site_url('admin/produk/edit/'.$row->id_produk)}}">
+                <button class="btn btn-info btn-sm">Edit</button>
+              </a>
+              <a href="{{ site_url('admin/produk/hapus/'.$row->id_produk)}}"
+                onclick="return confirm('Anda Yakin Ingin Menghapus ?')">
+                <button class="btn btn-danger btn-sm">Hapus</button>
+              </a>
             </td>
           </tr>
           <?php endforeach ?>
@@ -48,7 +52,7 @@
   </div>
 </div>
 @endsection
- 
+
 @section('js')
 <script type="text/javascript">
   $(document).ready(function () {

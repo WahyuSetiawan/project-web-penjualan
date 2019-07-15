@@ -22,7 +22,7 @@ class Setting extends Admin
         if (isset($files["logo"])) {
             $gambar = $files["logo"];
             $path = $this->path_image . "asset/logo/";
-            $nama_file = "logo.png";
+            $nama_file = md5(date("D-m-y h:i:s:u")). ".png";
 
             if ($this->upload("./" . $path, $nama_file, $gambar)) {
                 $this->settingModel->update("logo", $path . $nama_file);
@@ -37,7 +37,7 @@ class Setting extends Admin
 
     public function carousell()
     {
-$this->db->trans_begin();
+        $this->db->trans_begin();
         /*
 
         persiapan variable yang akan digunakan untuk penyimpanan carousell ke dalam database
@@ -49,7 +49,6 @@ $this->db->trans_begin();
         $old_data_carousel = $this->carousellModel->get();
 
         if (isset($_FILES["file_new"])) {
-
             $files_new = $_FILES["file_new"];
             $files_new = $this->convertFilesArray($files_new);
             $title_new = $this->input->post("title_new");
@@ -76,9 +75,7 @@ $this->db->trans_begin();
                     var_dump($data);
 
                     $this->carousellModel->set($data);
-                } else {
-
-                }
+                } else { }
             }
         }
 
@@ -116,8 +113,8 @@ $this->db->trans_begin();
 
         $this->db->trans_complete();
 
-        if($this->db->trans_status()){
-            redirect('admin/setting','refresh');
+        if ($this->db->trans_status()) {
+            redirect('admin/setting', 'refresh');
         }
     }
 }

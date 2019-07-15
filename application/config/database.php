@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'database_penjualan_testing',
-	'username' => 'root',
-	'password' => 'password',
+	'hostname' => 'localhost',
+	'username' => 'user',
+	'password' => 'pass',
 	'database' => 'penjualan',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

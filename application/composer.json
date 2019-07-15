@@ -15,7 +15,8 @@
         "xiaoler/blade": "^0.2.2",
         "chriskacerguis/codeigniter-restserver": "^3.0",
         "simshaun/recurr": "^3.0",
-        "dompdf/dompdf": "0.6.*"
+        "dompdf/dompdf": "0.6.*",
+        "fzaninotto/faker": "^1.8"
     },
     "suggest": {
         "paragonie/random_compat": "Provides better randomness in PHP 5.x"
