@@ -1,7 +1,6 @@
 @extends('template')
 @section('content')
 <div class="au-card recent-report">
-
   <div class="au-card-inner">
     <div class="row">
       <div class="col-md-12">
@@ -58,11 +57,11 @@
                 <td> {{$row->nama_kategori }} </td>
                 <td>Rp. {{ number_format($row->harga_produk,2,',','.')  }} </td>
                 <td>
-                <div class="<?= ($row->stok_produk == "Tersedia")? "status--process" : "status--denied"  ?>">  
-                  {{$row->stok_produk }} 
-                </div>
+                  <div class="<?= ($row->stok_produk == "Tersedia")? "status--process" : "status--denied"  ?>">
+                    {{$row->stok_produk }}
+                  </div>
                 </td>
-                
+
                 <td class="td-action" style=" width: 140px">
                   <a href="{{ site_url('admin/produk/edit/'.$row->id_produk)}}">
                     <button class="btn btn-info btn-sm">Edit</button>

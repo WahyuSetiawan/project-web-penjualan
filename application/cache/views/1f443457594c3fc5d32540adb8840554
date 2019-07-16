@@ -52,14 +52,12 @@
     <meta name="base_url_controller" content="<?php echo e(current_url()); ?>">
     <meta name="base_url" content="<?php echo e(base_url()); ?>">
 
+    <!-- Base CSS-->
+    <link href="<?php echo base_url('assets/admin') ?>/css/base.css" rel="stylesheet" media="all">
+
     <style>
         li.has-sub ul li.active {
             /* color: #4272d7; */
-        }
-
-        .td-action {
-            text-align: center;
-            width: 200px
         }
     </style>
 </head>
