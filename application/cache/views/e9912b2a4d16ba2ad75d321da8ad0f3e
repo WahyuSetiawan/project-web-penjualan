@@ -3,149 +3,193 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection("content"); ?>
-<div class="au-card recent-report">
+<?php
+$url_form = base_url("admin/produk/simpan");
 
-	<div class="au-card-inner">
-		<h3 class="title-5 m-b-35"><?php if(isset($produk)): ?> Ubah Data Produk <?php else: ?> Tambah Data Produk <?php endif; ?>
-		</h3>
+if (isset($produk)) {
+	$url_form =  base_url('admin/produk/ubah/'.$produk->id_produk); 
+}
+?>
 
-		<form action="<?php	
-		if (isset($produk)) {
-			echo base_url('admin/produk/ubah/'.$produk->id_produk); 
-		} else { 
-			echo base_url("admin/produk/simpan"); 
-			} 
-			?>" id="form_validation" method="POST" enctype="multipart/form-data">
 
-			<div class="form-group form-float">
-				<div class="form-line">
-					<label class="form-label">Nama Produk</label>
-					<input type="text" class="form-control" name="nama" required
-						value="<?php echo e((isset($produk->nama_produk))? $produk->nama_produk: ""); ?>">
-				</div>
-			</div>
+<div class="col-lg-16">
+	<div class="card">
+		<div class="card-header">
+			<strong>Tambah Produk</strong>
+			<small>Form</small>
+		</div>
+		<div class="card-body card-block">
+			<form action="<?php echo e($url_form); ?>" id="form_validation" method="POST" enctype="multipart/form-data">
 
-			<?php if(isset($produk)): ?>
-			<?php foreach($produk->kategori as $item): ?>
-			<input type="hidden" name="last_kategori[<?php echo e($item->id_kategori); ?>]" value="<?php echo e($item->id_detail_kategori); ?>" />
-			<?php endforeach; ?>
-			<?php endif; ?>
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="form-group">
+								<div class="form-line">
+									<label class="form-label">Nama Produk</label>
+									<input type="text" class="form-control" name="nama" required
+										value="<?php echo e((isset($produk->nama_produk))? $produk->nama_produk: ""); ?>">
+								</div>
+							</div>
 
-			<div class="from-group from-float">
-				<div>
-					<label>Kategori Model</label>
-					<div>
-						<?php foreach ($kategori as $key => $value) { ?>
-						<input type="checkbox" name="kategori[<?php echo e($value->id_kategori); ?>]"
-							<?php echo e(isset($produk->kategori[$value->id_kategori])? "checked":""); ?>> <?php echo e($value->nama_kategori); ?>
+							<div class="form-group form-float">
+								<div class="form-line">
+									<label class="form-label">Harga : <small>(dalam rupiah/Rp.)</small></label>
+									<input type="number" min="1" max="1000000000" class="form-control"
+										name="harga" required value="<?php echo e((isset($produk->harga_produk))? $produk->harga_produk: "
+											"); ?>">
+								</div>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								<label for="exampleFormControlFile1">Upload Foto Produk</label>
+								<input type="file" class="form-control-file" id="exampleFormControlFile1">
+							</div>
+						</div>
+					</div>
 
-						<br>
-						<?php } ?>
+					<div class="row m-b-35">
+						<div class="col-3">
+							<div class="from-group from-float">
+								<div>
+									<label>Kategori Model</label>
+									<div>
+										<?php foreach ($kategori as $key => $value) { ?>
+										<input type="checkbox" name="kategori[<?php echo e($value->id_kategori); ?>]"
+											<?php echo e(isset($produk->kategori[$value->id_kategori])? "checked":""); ?>>
+										<?php echo e($value->nama_kategori); ?>
+
+										<br>
+										<?php } ?>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col">
+
+							<div class="form-group form-float">
+								<div class="form-line">
+									<label class="form-label">Deskripsi Produk</label>
+									<textarea name="deskripsi" cols="30" rows="5"
+										class="form-control no-resize"
+										required><?php echo e((isset($produk->deskripsi_produk))? $produk->deskripsi_produk: ""); ?></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<table class="table table-striped" style="border: none !important;">
+							<thead>
+								<tr>
+									<td>Tambah Gambar Utama</td>
+									<td>Image</td>
+								</tr>
+							</thead>
+							<tbody id="TextBoxContainer1">
+								<td><input type='file' class="form-control" name="gambar_utama"></td>
+								<td>
+									<img src="<?Php
+									if (isset($produk->gambar_utama) && $produk->gambar_utama != " ") {
+										echo base_url($produk->gambar_utama);
+									} else {
+										echo base_url();
+									}	
+									?>" class="img img-loader-utama" style="-o-object-fit: none; object-fit: cover;$produk\ width:200px;height:200px;" />
+								</td>
+							</tbody>
+							<thead>
+								<tr>
+									<td>Tambah Gambar Pendukung</td>
+									<td>Image</td>
+								</tr>
+							</thead>
+
+							<?php if(isset($produk->gambar_lain)): ?>
+							<?php foreach($produk->gambar_lain as $key => $value): ?>
+							<input type="hidden" name="pic_last_tmp[<?php echo e($value->id_gambar_produk); ?>]"
+								value="<?php echo e($value->path); ?>" />
+							<?php endforeach; ?>
+							<?php endif; ?>
+
+							<tbody id="TextBoxContainer">
+								<?php if(isset($produk->gambar_lain)): ?> <?php foreach($produk->gambar_lain as $key =>
+								$value): ?>
+								<tr>
+									<td>
+										<input type="file" class="form-control"
+											name="gambar_tambahan[<?php echo e($value->id_gambar_produk); ?>]"
+											data-idgambar="<?php echo e($value->id_gambar_produk); ?>">
+										<input type="hidden" name="pic_last[<?php echo e($value->id_gambar_produk); ?>]"
+											value="<?php echo e($value->path); ?>" />
+									</td>
+									<td>
+										<img src="<?php echo e(base_url($value->path)); ?>" alt="your"
+											class="img img-loader"
+											data-idgambar="<?php echo e($value->id_gambar_produk); ?>"
+											style="-o-object-fit: none; object-fit: cover;$produk\ width:200px;height:200px;" />
+									</td>
+									<td>
+										<button type="button" class="btn btn-danger img-remove"
+											data-idgambar="<?php echo e($value->id_gambar_produk); ?>"><i
+												class="glyphicon glyphicon-remove-sign"></i></button>
+									</td>
+								</tr>
+								<?php endforeach; ?> <?php endif; ?>
+							</tbody>
+
+							<tbody>
+								<tr>
+									<th colspan="5">
+										<button id="btnAdd" type="button"
+											class="btn btn-primary btn-sm btn-add-image"
+											data-toggle="tooltip" data-original-title="Add more controls"><i
+												class="glyphicon glyphicon-plus-sign"></i>&nbsp; Tambah
+											Foto&nbsp;</button>
+									</th>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
-			</div>
 
-			<div class="form-group form-float">
-				<select id="kategori" multiple class="form-control">
-					<?php foreach ($kategori as $key => $value) { ?>
-					<option value="<?php echo e($value->id_kategori); ?>"><?php echo e($value->nama_kategori); ?></option>
-					<?php } ?>
+
+				<?php
+/*
+
+				<div class="form-group form-float">
+					<select id="kategori" multiple class="form-control">
+						<?php foreach ($kategori as $key => $value) { ?>
+				<option value="{{ $value->id_kategori}}">{{ $value->nama_kategori }}</option>
+				<?php } ?>
 				</select>
-			</div>
-
-			<div class="form-group form-float">
-				<div class="form-line">
-					<label class="form-label">Harga : Rp.</label>
-					<input type="number" min="1" max="1000000000" class="form-control" name="harga" required value="<?php echo e((isset($produk->harga_produk))? $produk->harga_produk: "
-					"); ?>">
-				</div>
-			</div>
-
-			<?php /* <div class="form-group form-float">
-				<label class="form-label">Stok</label>
-				<select class="form-control" name="stok" required>
-					<option>Tersedia</option>
-					<option>Kosong</option>
-				</select>
-			</div> */ ?>
-
-			<div class="form-group form-float">
-				<div class="form-line">
-					<label class="form-label">Deskripsi Produk</label>
-					<textarea name="deskripsi" cols="30" rows="5" class="form-control no-resize"
-						required><?php echo e((isset($produk->deskripsi_produk))? $produk->deskripsi_produk: ""); ?></textarea>
-				</div>
-			</div>
+		</div>
+		*/
+		?>
+		<?php if(isset($produk)): ?>
+		<?php foreach($produk->kategori as $item): ?>
+		<input type="hidden" name="last_kategori[<?php echo e($item->id_kategori); ?>]" value="<?php echo e($item->id_detail_kategori); ?>" />
+		<?php endforeach; ?>
+		<?php endif; ?>
 
 
-			<table class="table table-striped" style="border: none !important;">
-				<thead>
-					<tr>
-						<td>Tambah Gambar Utama</td>
-						<td>Image</td>
-					</tr>
-				</thead>
-				<tbody id="TextBoxContainer1">
-					<td><input type='file' class="form-control" name="gambar_utama"></td>
-					<td>
-						<img src="<?Php
-							if (isset($produk->gambar_utama) && $produk->gambar_utama != " ") {
-								echo base_url($produk->gambar_utama);
-							} else {
-								echo base_url();
-							}	
-							?>" class="img img-loader-utama"
-							style="-o-object-fit: none; object-fit: cover;$produk\ width:200px;height:200px;" />
-					</td>
-				</tbody>
-				<thead>
-					<tr>
-						<td>Tambah Gambar Pendukung</td>
-						<td>Image</td>
-					</tr>
-				</thead>
 
-				<?php if(isset($produk->gambar_lain)): ?> <?php foreach($produk->gambar_lain as $key => $value): ?>
-				<input type="hidden" name="pic_last_tmp[<?php echo e($value->id_gambar_produk); ?>]" value="<?php echo e($value->path); ?>" />
-				<?php endforeach; ?> <?php endif; ?>
 
-				<tbody id="TextBoxContainer">
-					<?php if(isset($produk->gambar_lain)): ?> <?php foreach($produk->gambar_lain as $key => $value): ?>
-					<tr>
-						<td>
-							<input type="file" class="form-control" name="gambar_tambahan[<?php echo e($value->id_gambar_produk); ?>]"
-								data-idgambar="<?php echo e($value->id_gambar_produk); ?>">
-							<input type="hidden" name="pic_last[<?php echo e($value->id_gambar_produk); ?>]"
-								value="<?php echo e($value->path); ?>" />
-						</td>
-						<td>
-							<img src="<?php echo e(base_url($value->path)); ?>" alt="your" class="img img-loader"
-								data-idgambar="<?php echo e($value->id_gambar_produk); ?>"
-								style="-o-object-fit: none; object-fit: cover;$produk\ width:200px;height:200px;" />
-						</td>
-						<td>
-							<button type="button" class="btn btn-danger img-remove"
-								data-idgambar="<?php echo e($value->id_gambar_produk); ?>"><i
-									class="glyphicon glyphicon-remove-sign"></i></button>
-						</td>
-					</tr>
-					<?php endforeach; ?> <?php endif; ?>
-				</tbody>
 
-				<tbody>
-					<tr>
-						<th colspan="5">
-							<button id="btnAdd" type="button" class="btn btn-primary btn-sm btn-add-image"
-								data-toggle="tooltip" data-original-title="Add more controls"><i
-									class="glyphicon glyphicon-plus-sign"></i>&nbsp; Tambah Foto&nbsp;</button>
-						</th>
-					</tr>
-				</tbody>
-			</table>
+		<?php /* <div class="form-group form-float">
+					<label class="form-label">Stok</label>
+					<select class="form-control" name="stok" required>
+						<option>Tersedia</option>
+						<option>Kosong</option>
+					</select>
+				</div> */ ?>
 
-			<button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
-		</form>
+
+		<button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
 	</div>
+	</form>
+
 </div>
 
 <table style="display: none">

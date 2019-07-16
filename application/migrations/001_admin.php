@@ -481,7 +481,6 @@ class Migration_admin extends CI_Migration
         $this->dbforge->drop_table("tbl_konsumen");
         $this->dbforge->drop_table("tbl_supplier");
     }
-
 }
 
 /* End of file Controllername.php */
