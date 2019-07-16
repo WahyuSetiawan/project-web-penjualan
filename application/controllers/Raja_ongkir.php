@@ -1,9 +1,11 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Raja_ongkir extends CI_Controller {
+class Raja_ongkir extends CI_Controller
+{
 
-	function get_kota($province){		
+	function get_kota($province)
+	{
 
 		$curl = curl_init();
 
@@ -28,17 +30,17 @@ class Raja_ongkir extends CI_Controller {
 		if ($err) {
 			echo "cURL Error #:" . $err;
 		} else {
-		  //echo $response;
+			//echo $response;
 			$data = json_decode($response, true);
-			echo "<option value='' selected=''>Pilih Nama Kota</option>"; 
-			for ($j=0; $j < count($data['rajaongkir']['results']); $j++){
-				echo "<option value='".$data['rajaongkir']['results'][$j]['city_id']."' data-kota='".$data['rajaongkir']['results'][$j]['city_name']."'>".$data['rajaongkir']['results'][$j]['city_name']."</option>"; 
+			echo "<option value='' selected=''>Pilih Nama Kota</option>";
+			for ($j = 0; $j < count($data['rajaongkir']['results']); $j++) {
+				echo "<option value='" . $data['rajaongkir']['results'][$j]['city_id'] . "' data-kota='" . $data['rajaongkir']['results'][$j]['city_name'] . "'>" . $data['rajaongkir']['results'][$j]['city_name'] . "</option>";
 			}
 		}
 	}
 
-	function get_pengiriman(){	
-
+	function get_pengiriman()
+	{
 		$destination = $this->input->post('destination');
 		$berat	 = $this->input->post('berat');
 		$courier = $this->input->post('courier');
@@ -67,28 +69,28 @@ class Raja_ongkir extends CI_Controller {
 		if ($err) {
 			echo "cURL Error #:" . $err;
 		} else {
-				  //echo $response;
+			//echo $response;
 			$data = json_decode($response, true);
 		}
 
 		// var_dump($data);die(); 
 
 
-		for ($k=0; $k < count($data['rajaongkir']['results']); $k++) {
+		for ($k = 0; $k < count($data['rajaongkir']['results']); $k++) {
 			// var_dump($data['rajaongkir']['results'][$k]['costs']);die();
-			if ($data['rajaongkir']['results'][$k]['costs']==null) {
-				echo "<option value='' selected disabled>Expedisi ini Tidak Tersedia. Ganti expedisi Yang lain.</option>"; 
-			}else{
-				echo "<option value='' selected disabled>Pilih Service pengiriman</option>"; 
-				for ($l=0; $l < count($data['rajaongkir']['results'][$k]['costs']); $l++) {
+			if ($data['rajaongkir']['results'][$k]['costs'] == null) {
+				echo "<option value='' selected disabled>Expedisi ini Tidak Tersedia. Ganti expedisi Yang lain.</option>";
+			} else {
+				echo "<option value='' selected disabled>Pilih Service pengiriman</option>";
+				for ($l = 0; $l < count($data['rajaongkir']['results'][$k]['costs']); $l++) {
 
 					?>
-					<option value="<?php echo $data['rajaongkir']['results'][$k]['costs'][$l]['service'];?>" ongkir="<?php echo $data['rajaongkir']['results'][$k]['costs'][$l]['cost'][0]['value'];?>"><?php echo $data['rajaongkir']['results'][$k]['costs'][$l]['service'];?> - <?php echo number_format($data['rajaongkir']['results'][$k]['costs'][$l]['cost'][0]['value']);?></option>
-					<?php 
-				}
+				<option value="<?php echo $data['rajaongkir']['results'][$k]['costs'][$l]['service']; ?>" ongkir="<?php echo $data['rajaongkir']['results'][$k]['costs'][$l]['cost'][0]['value']; ?>"><?php echo $data['rajaongkir']['results'][$k]['costs'][$l]['service']; ?> - <?php echo number_format($data['rajaongkir']['results'][$k]['costs'][$l]['cost'][0]['value']); ?></option>
+			<?php
 			}
 		}
 	}
+}
 }
 
 /* End of file Raja_ongkir.php */

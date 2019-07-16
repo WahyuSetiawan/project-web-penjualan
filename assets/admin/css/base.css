@@ -7,3 +7,22 @@
     text-align: center;
     width: 200px
 }
+
+.td-image {
+    text-align: center;
+    width: 80px;
+}
+
+.image-item-big {
+    -o-object-fit: none;
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+}
+
+.image-item-small {
+    -o-object-fit: none;
+    object-fit: cover;
+    width: 70px;
+    height: 70px;
+}

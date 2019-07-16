@@ -9,10 +9,11 @@
 $url_form = base_url("admin/produk/simpan");
 
 if (isset($produk)) {
-	$url_form =  base_url('admin/produk/ubah/'.$produk->id_produk); 
+	$url_form = base_url('admin/produk/ubah/'.$produk->id_produk); 
 }
-?>
 
+$image_utama_url =  (isset($produk->gambar_utama) && $produk->gambar_utama != " ") ?	base_url($produk->gambar_utama) : base_url();
+?>
 
 <div class="col-lg-16">
 	<div class="card">
@@ -43,10 +44,12 @@ if (isset($produk)) {
 								</div>
 							</div>
 						</div>
-						<div class="col">
+						<div class="col-4" style="text-align: center">
 							<div class="form-group">
 								<label for="exampleFormControlFile1">Upload Foto Produk</label>
-								<input type="file" class="form-control-file" id="exampleFormControlFile1">
+								<img src="{{$image_utama_url}}"
+									class="img img-loader-utama img-thumbnail image-item-big" />
+								<input type="file" class="form-control-file" name="gambar_utama">
 							</div>
 						</div>
 					</div>
@@ -82,24 +85,7 @@ if (isset($produk)) {
 
 					<div class="row">
 						<table class="table table-striped" style="border: none !important;">
-							<thead>
-								<tr>
-									<td>Tambah Gambar Utama</td>
-									<td>Image</td>
-								</tr>
-							</thead>
-							<tbody id="TextBoxContainer1">
-								<td><input type='file' class="form-control" name="gambar_utama"></td>
-								<td>
-									<img src="<?Php
-									if (isset($produk->gambar_utama) && $produk->gambar_utama != " ") {
-										echo base_url($produk->gambar_utama);
-									} else {
-										echo base_url();
-									}	
-									?>" class="img img-loader-utama" style="-o-object-fit: none; object-fit: cover;$produk\ width:200px;height:200px;" />
-								</td>
-							</tbody>
+
 							<thead>
 								<tr>
 									<td>Tambah Gambar Pendukung</td>
@@ -173,10 +159,6 @@ if (isset($produk)) {
 		<input type="hidden" name="last_kategori[{{$item->id_kategori}}]" value="{{$item->id_detail_kategori}}" />
 		@endforeach
 		@endif
-
-
-
-
 
 		{{-- <div class="form-group form-float">
 					<label class="form-label">Stok</label>

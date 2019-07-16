@@ -42,6 +42,7 @@
             <thead>
               <tr>
                 <th>No</th>
+                <th></th>
                 <th>Nama Produk</th>
                 <th>Kategori</th>
                 <th>Harga Produk</th>
@@ -52,7 +53,16 @@
             <tbody>
               <?php foreach ($produk as $row): ?>
               <tr>
-                <td></td>
+                <td class="td-no"></td>
+                <td class="td-image">
+                  <img src="<?php
+                    if (isset($row->gambar_utama) && $row->gambar_utama != " ") {
+                      echo base_url($row->gambar_utama);
+                    } else {
+                      echo base_url();
+                    }
+                    ?>" class="img img-loader-utama img-thumbnail image-item-small" />
+                </td>
                 <td> {{$row->nama_produk }} </td>
                 <td> {{$row->nama_kategori }} </td>
                 <td>Rp. {{ number_format($row->harga_produk,2,',','.')  }} </td>
