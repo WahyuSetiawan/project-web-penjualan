@@ -84,8 +84,49 @@ $image_utama_url =  (isset($produk->gambar_utama) && $produk->gambar_utama != " 
 					</div>
 
 					<div class="row">
-						<table class="table table-striped" style="border: none !important;">
+						<div class="col m-b-35">
+							<div class="row">
+								<div class="col m-b-25">
+									Gambar detail Barang
+								</div>
+							</div>
+							@if (isset($produk->gambar_lain))
+							@foreach ($produk->gambar_lain as $key => $value)
+							<input type="hidden" name="pic_last_tmp[{{$value->id_gambar_produk}}]"
+								value="{{$value->path}}" />
+							@endforeach
+							@endif
+							
+							<div class="row container-image-tambahan">
+								@if (isset($produk->gambar_lain))
+								@foreach ($produk->gambar_lain as $key => $value)
+								<div class="col-3">
+									<div class="container-image">
+										<img src="{{base_url($value->path)}}"
+											class="img img-loader img-thumbnail image-item-big action-open-image"
+											data-idgambar="{{$value->id_gambar_produk}}" />
 
+										<div class="delete">
+											<button type="button" class="btn btn-danger img-remove"
+												data-idgambar="{{$value->id_gambar_produk}}"><i
+													class="glyphicon glyphicon-remove-sign"></i></button>
+										</div>
+									</div>
+									<div style="display: none">
+										<input type="file" class="form-control"
+											name="gambar_tambahan[{{$value->id_gambar_produk}}]"
+											data-idgambar="{{$value->id_gambar_produk}}">
+										<input type="hidden" name="pic_last[{{$value->id_gambar_produk}}]"
+											value="{{$value->path}}" />
+									</div>
+								</div>
+								@endforeach
+								@endif
+							</div>
+						</div>
+
+
+						{{-- <table class="table table-striped" style="border: none !important;">
 							<thead>
 								<tr>
 									<td>Tambah Gambar Pendukung</td>
@@ -93,12 +134,6 @@ $image_utama_url =  (isset($produk->gambar_utama) && $produk->gambar_utama != " 
 								</tr>
 							</thead>
 
-							@if (isset($produk->gambar_lain))
-							@foreach ($produk->gambar_lain as $key => $value)
-							<input type="hidden" name="pic_last_tmp[{{$value->id_gambar_produk}}]"
-								value="{{$value->path}}" />
-							@endforeach
-							@endif
 
 							<tbody id="TextBoxContainer">
 								@if (isset($produk->gambar_lain)) @foreach ($produk->gambar_lain as $key =>
@@ -107,37 +142,36 @@ $image_utama_url =  (isset($produk->gambar_utama) && $produk->gambar_utama != " 
 									<td>
 										<input type="file" class="form-control"
 											name="gambar_tambahan[{{$value->id_gambar_produk}}]"
-											data-idgambar="{{$value->id_gambar_produk}}">
-										<input type="hidden" name="pic_last[{{$value->id_gambar_produk}}]"
-											value="{{$value->path}}" />
-									</td>
-									<td>
-										<img src="{{base_url($value->path)}}" alt="your"
-											class="img img-loader"
-											data-idgambar="{{$value->id_gambar_produk}}"
-											style="-o-object-fit: none; object-fit: cover;$produk\ width:200px;height:200px;" />
-									</td>
-									<td>
-										<button type="button" class="btn btn-danger img-remove"
-											data-idgambar="{{$value->id_gambar_produk}}"><i
-												class="glyphicon glyphicon-remove-sign"></i></button>
-									</td>
-								</tr>
-								@endforeach @endif
-							</tbody>
+						data-idgambar="{{$value->id_gambar_produk}}">
+						<input type="hidden" name="pic_last[{{$value->id_gambar_produk}}]"
+							value="{{$value->path}}" />
+						</td>
+						<td>
+							<img src="{{base_url($value->path)}}" alt="your" class="img img-loader"
+								data-idgambar="{{$value->id_gambar_produk}}"
+								style="-o-object-fit: none; object-fit: cover;$produk\ width:200px;height:200px;" />
+						</td>
+						<td>
+							<button type="button" class="btn btn-danger img-remove"
+								data-idgambar="{{$value->id_gambar_produk}}"><i
+									class="glyphicon glyphicon-remove-sign"></i></button>
+						</td>
+						</tr>
+						@endforeach @endif
+						</tbody>
 
-							<tbody>
-								<tr>
-									<th colspan="5">
-										<button id="btnAdd" type="button"
-											class="btn btn-primary btn-sm btn-add-image"
-											data-toggle="tooltip" data-original-title="Add more controls"><i
-												class="glyphicon glyphicon-plus-sign"></i>&nbsp; Tambah
-											Foto&nbsp;</button>
-									</th>
-								</tr>
-							</tbody>
-						</table>
+						<tbody>
+							<tr>
+								<th colspan="5">
+									<button id="btnAdd" type="button"
+										class="btn btn-primary btn-sm btn-add-image" data-toggle="tooltip"
+										data-original-title="Add more controls"><i
+											class="glyphicon glyphicon-plus-sign"></i>&nbsp; Tambah
+										Foto&nbsp;</button>
+								</th>
+							</tr>
+						</tbody>
+						</table> --}}
 					</div>
 				</div>
 
@@ -175,7 +209,7 @@ $image_utama_url =  (isset($produk->gambar_utama) && $produk->gambar_utama != " 
 
 </div>
 
-<table style="display: none">
+{{-- <table style="display: none">
 	<tbody id="template_image">
 		<tr>
 			<td>
@@ -183,87 +217,41 @@ $image_utama_url =  (isset($produk->gambar_utama) && $produk->gambar_utama != " 
 			</td>
 			<td>
 				<img data-idgambar="" src="{{base_url('/assets/assets_public/image/180x180px.png')}}"
-					class="img img-loader" alt="your image"
-					style="-o-object-fit: none; object-fit: cover;$produk\ width:200px;height:200px;" />
-			</td>
-			<td>
-				<button type="button" class="btn btn-danger img-remove" data-idgambar=""><i
+class="img img-loader" alt="your image"
+style="-o-object-fit: none; object-fit: cover;$produk\ width:200px;height:200px;" />
+</td>
+<td>
+	<button type="button" class="btn btn-danger img-remove" data-idgambar=""><i
+			class="glyphicon glyphicon-remove-sign"></i></button>
+</td>
+</tr>
+</tbody>
+</table> --}}
+
+<div id="template_image" style="display: none">
+	<div class="col-3">
+		<div class="container-image">
+			<img src="{{base_url('images/wallpaper/wallpaper_material_red.png')}}"
+				class="img img-loader img-thumbnail image-item-big action-open-image" data-idgambar="" />
+
+			<div class="delete" style="display: none">
+				<button type="button" class="btn btn-danger img-remove"
+					data-idgambar="{{$value->id_gambar_produk}}"><i
 						class="glyphicon glyphicon-remove-sign"></i></button>
-			</td>
-		</tr>
-	</tbody>
-</table>
+			</div>
+		</div>
+		<div style="display: none">
+			<input type="file" class="form-control" name="gambar_tambahan[]" data-idgambar="">
+		</div>
+	</div>
+</div>
+
 @endsection
 
 @section('js')
 <script src="{{ base_url("assets/admin/js/slimselect.min.js")}}" type="text/javascript"></script>
 
 <script type="text/javascript">
-	var template_image = $('#template_image');
-	var container = $('#TextBoxContainer');
-
-	var index_gambar_terbaru = 0;
-
-
-	$(document).on("click", ".img-remove",
-		function () {
-			var index = $(this).data("idgambar");
-			$(this).parent().parent().remove();
-		});
-
-	$(document).on('click', '.btn-add-image',
-		function () {
-			if (container.find("tr").length < 4) {
-
-				while (true) {
-					if ($("input[name='gambar_tambahan[" + index_gambar_terbaru + "]'").length == 0) {
-						break;
-					} else {
-						index_gambar_terbaru++;
-					}
-				}
-
-				var template_clone = template_image.clone();
-
-				$(template_clone).find("input[name='gambar_tambahan[]']")
-					.attr('name', "gambar_tambahan[" + index_gambar_terbaru + "]")
-					.attr("data-idgambar", index_gambar_terbaru);
-
-				$(template_clone).find('.img-loader')
-					.attr("data-idgambar", index_gambar_terbaru);
-
-				$(template_clone).find('.btn .img-remove')
-					.attr('data-idgambar', index_gambar_terbaru);
-
-				container.append(template_clone.html());
-
-				index_gambar_terbaru++;
-			} else {
-				alert("Gambar tambahan hanya 4 gambar saja");
-			}
-		});
-
-	$(document).on("change", "input[name*='gambar_tambahan['], input[name='gambar_utama']",
-		function () {
-			var name = $(this).attr("name");
-			var index = $(this).data("idgambar");
-
-			if (this.files && this.files[0]) {
-				var reader = new FileReader();
-
-				reader.onload = function (e) {
-					if (name == "gambar_utama") {
-						$(".img-loader-utama").attr('src', e.target.result);
-					} else {
-						$(".img-loader[data-idgambar='" + index + "']").attr('src', e.target.result);
-					}
-				}
-
-				reader.readAsDataURL(this.files[0]);
-			}
-		});
-
-
 	// $(function (a) {
 	// 	var iCnt = 1;
 

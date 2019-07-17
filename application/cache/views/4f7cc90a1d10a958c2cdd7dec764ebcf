@@ -14,22 +14,25 @@
 
     <!-- Fontfaces CSS-->
     <link href="<?php echo base_url('assets/admin') ?>/css/font-face.css" rel="stylesheet" media="all">
-    <link href="<?php echo base_url('assets/admin') ?>/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet"
-        media="all">
-    <link href="<?php echo base_url('assets/admin') ?>/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet"
-        media="all">
-    <link href="<?php echo base_url('assets/admin') ?>/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet"
-        media="all">
+    <link href="<?php echo base_url('assets/admin') ?>/vendor/font-awesome-4.7/css/font-awesome.min.css"
+        rel="stylesheet" media="all">
+    <link href="<?php echo base_url('assets/admin') ?>/vendor/font-awesome-5/css/fontawesome-all.min.css"
+        rel="stylesheet" media="all">
+    <link href="<?php echo base_url('assets/admin') ?>/vendor/mdi-font/css/material-design-iconic-font.min.css"
+        rel="stylesheet" media="all">
 
     <!-- Bootstrap CSS-->
-    <link href="<?php echo base_url('assets/admin') ?>/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="<?php echo base_url('assets/admin') ?>/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet"
+        media="all">
 
     <!-- Vendor CSS-->
-    <link href="<?php echo base_url('assets/admin') ?>/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="<?php echo base_url('assets/admin') ?>/vendor/animsition/animsition.min.css" rel="stylesheet"
+        media="all">
     <link href="<?php echo base_url('assets/admin') ?>/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css"
         rel="stylesheet" media="all">
     <link href="<?php echo base_url('assets/admin') ?>/vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="<?php echo base_url('assets/admin') ?>/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="<?php echo base_url('assets/admin') ?>/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet"
+        media="all">
     <link href="<?php echo base_url('assets/admin') ?>/vendor/slick/slick.css" rel="stylesheet" media="all">
     <link href="<?php echo base_url('assets/admin') ?>/vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="<?php echo base_url('assets/admin') ?>/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet"
@@ -45,9 +48,6 @@
 
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-
-
-
 </head>
 
 <body class="">
@@ -63,11 +63,13 @@
                             <form action="<?php echo site_url('admin/login/login') ?>" method="post">
                                 <div class="form-group">
                                     <label>Email Address</label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Email">
+                                    <input class="au-input au-input--full" type="email" name="email"
+                                        placeholder="Email">
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
+                                    <input class="au-input au-input--full" type="password" name="password"
+                                        placeholder="Password">
                                 </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
                             </form>
@@ -78,9 +80,6 @@
             </div>
         </div>
     </div>
-
-
-
 
     <!-- Jquery JS-->
     <!-- <script src="<?php echo base_url('assets/admin') ?>/vendor/jquery-3.2.1.min.js"></script> -->
@@ -106,9 +105,6 @@
     <!-- Main JS-->
     <script src="<?php echo base_url('assets/admin') ?>/js/main.js"></script>
     <script src="<?php echo base_url('assets/admin') ?>/js/jquery.dataTables.js"></script>
-
-
 </body>
-
 </html>
 <!-- end document-->

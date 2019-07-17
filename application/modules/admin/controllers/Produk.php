@@ -34,219 +34,219 @@ class Produk extends Admin
 
     public function simpan()
     {
-        $this->db->trans();
+        // $this->db->trans();
 
-        $data = array();
-        $filesCount = count($_FILES['gambar_tambahan']['name']);
-        // var_dump($filesCount);die()
-        $files = $_FILES;
+        // $data = array();
+        // $filesCount = count($_FILES['gambar_tambahan']['name']);
+        // // var_dump($filesCount);die()
+        // $files = $_FILES;
 
-        $nmfile = "file_u_" . time() . ".jpg";
+        // $nmfile = "file_u_" . time() . ".jpg";
 
-        if ($this->upload($nmfile, $files['gambar_utama'])) {
-            $data_produk = array(
-                'nama_produk' => $this->input->post('nama'),
-                'harga_produk' => $this->input->post('harga'),
-                'stok_produk' => $this->input->post('stok'),
-                'deskripsi_produk' => $this->input->post('deskripsi'),
-                'gambar_utama' => "uploads/" . $nmfile,
-            );
+        // if ($this->upload($nmfile, $files['gambar_utama'])) {
+        //     $data_produk = array(
+        //         'nama_produk' => $this->input->post('nama'),
+        //         'harga_produk' => $this->input->post('harga'),
+        //         'stok_produk' => $this->input->post('stok'),
+        //         'deskripsi_produk' => $this->input->post('deskripsi'),
+        //         'gambar_utama' => "uploads/" . $nmfile,
+        //     );
 
-            $this->produkModel->set($data_produk);
-            $id = $this->db->insert_id();
+        //     $this->produkModel->set($data_produk);
+        //     $id = $this->db->insert_id();
 
-            foreach ($this->input->post("kategori") as $key => $value) {
-                $this->detailKategoriModel->set([
-                    'id_produk' => $id,
-                    'id_kategori' => $key,
-                ]);
-            }
+        //     foreach ($this->input->post("kategori") as $key => $value) {
+        //         $this->detailKategoriModel->set([
+        //             'id_produk' => $id,
+        //             'id_kategori' => $key,
+        //         ]);
+        //     }
 
-            foreach ($files['gambar_tambahan']['name'] as $i => $value) {
-                $nmfile = "file_" . time() . $i . ".jpg";
+        //     foreach ($files['gambar_tambahan']['name'] as $i => $value) {
+        //         $nmfile = "file_" . time() . $i . ".jpg";
 
-                $f['name'] = $files['gambar_tambahan']['name'][$i];
-                $f['type'] = $files['gambar_tambahan']['type'][$i];
-                $f['tmp_name'] = $files['gambar_tambahan']['tmp_name'][$i];
-                $f['error'] = $files['gambar_tambahan']['error'][$i];
-                $f['size'] = $files['gambar_tambahan']['size'][$i];
+        //         $f['name'] = $files['gambar_tambahan']['name'][$i];
+        //         $f['type'] = $files['gambar_tambahan']['type'][$i];
+        //         $f['tmp_name'] = $files['gambar_tambahan']['tmp_name'][$i];
+        //         $f['error'] = $files['gambar_tambahan']['error'][$i];
+        //         $f['size'] = $files['gambar_tambahan']['size'][$i];
 
-                if ($this->upload($nmfile, $f)) {
-                    $url = $this->upload->data();
-                    $angka_nomer = $i + 1;
+        //         if ($this->upload($nmfile, $f)) {
+        //             $url = $this->upload->data();
+        //             $angka_nomer = $i + 1;
 
-                    $this->gambarProdukModel->set([
-                        'path' => "uploads/" . $nmfile,
-                        'id_produk' => $id,
-                    ]);
+        //             $this->gambarProdukModel->set([
+        //                 'path' => "uploads/" . $nmfile,
+        //                 'id_produk' => $id,
+        //             ]);
 
-                    $configer = array(
-                        'image_library' => 'gd2',
-                        'source_image' => $url['full_path'],
-                        'maintain_ratio' => true,
-                        'width' => 300,
-                        'height' => 300,
-                    );
+        //             $configer = array(
+        //                 'image_library' => 'gd2',
+        //                 'source_image' => $url['full_path'],
+        //                 'maintain_ratio' => true,
+        //                 'width' => 300,
+        //                 'height' => 300,
+        //             );
 
-                    $this->image_lib->clear();
-                    $this->image_lib->initialize($configer);
-                    $this->image_lib->resize();
-                }
-            }
-        }
+        //             $this->image_lib->clear();
+        //             $this->image_lib->initialize($configer);
+        //             $this->image_lib->resize();
+        //         }
+        //     }
+        // }
 
-        $this->db->trans_complete();
+        // $this->db->trans_complete();
 
-        if ($this->db->trans_status()) {
-            $this->session->set_flashdata('insert_produk_success', 'Berhasil menambahkan data produk baru');
-            redirect('produk', 'refresh');
-        } else {
-            $this->session->set_flashdata('insert_produk_failed', 'Tidak berhasil menambahkan data produk baru ');
-            redirect('produk/add', 'refresh');
-        }
+        // if ($this->db->trans_status()) {
+        //     $this->session->set_flashdata('insert_produk_success', 'Berhasil menambahkan data produk baru');
+        //     redirect('admin/produk', 'refresh');
+        // } else {
+        //     $this->session->set_flashdata('insert_produk_failed', 'Tidak berhasil menambahkan data produk baru ');
+        //     redirect('admin/produk/add', 'refresh');
+        // }
     }
 
     public function ubah($id_produk)
     {
-        $this->db->trans_begin();
+        // $this->db->trans_begin();
 
-        /*
+        // /*
 
-        prepare variable to change produk method
-        must prepare because the method is to tricky
+        // prepare variable to change produk method
+        // must prepare because the method is to tricky
 
-         */
-        $gambar_tambahan = $this->convertFilesArray($_FILES['gambar_tambahan']);
+        //  */
+        // $gambar_tambahan = $this->convertFilesArray($_FILES['gambar_tambahan']);
 
-        $tmp_pic_last = $this->input->post('pic_last');
-        $tmp_pic_last_tmp = $this->input->post('pic_last_tmp');
-        $tmp_kategori_last = $this->input->post("last_kategori");
+        // $tmp_pic_last = $this->input->post('pic_last');
+        // $tmp_pic_last_tmp = $this->input->post('pic_last_tmp');
+        // $tmp_kategori_last = $this->input->post("last_kategori");
 
-        $last_data = $this->produkModel->get($id_produk);
+        // $last_data = $this->produkModel->get($id_produk);
 
-        /*
+        // /*
 
-        insert data utama produk kedalam database
-        hal ini dilakukan untuk  mendapatkan data utama dari data produk
+        // insert data utama produk kedalam database
+        // hal ini dilakukan untuk  mendapatkan data utama dari data produk
 
-         */
+        //  */
 
-        $namafile_gambar_utama_ubah = "file_u_" . time() . ".jpg";
+        // $namafile_gambar_utama_ubah = "file_u_" . time() . ".jpg";
 
-        if (isset($_FILES['gambar_utama'])) {
-            if ($this->upload($namafile_gambar_utama_ubah, $_FILES['gambar_utama'])) {
-                $namafile_gambar_utama_ubah = "uploads/" . $namafile_gambar_utama_ubah;
-            } else {
-                $namafile_gambar_utama_ubah = $last_data->gambar_utama;
-            }
-        } else {
-            $namafile_gambar_utama_ubah = $last_data->gambar_utama;
-        }
+        // if (isset($_FILES['gambar_utama'])) {
+        //     if ($this->upload($namafile_gambar_utama_ubah, $_FILES['gambar_utama'])) {
+        //         $namafile_gambar_utama_ubah = "uploads/" . $namafile_gambar_utama_ubah;
+        //     } else {
+        //         $namafile_gambar_utama_ubah = $last_data->gambar_utama;
+        //     }
+        // } else {
+        //     $namafile_gambar_utama_ubah = $last_data->gambar_utama;
+        // }
 
-        $data_produk = array(
-            'nama_produk' => $this->input->post('nama'),
-            'harga_produk' => $this->input->post('harga'),
-            'stok_produk' => $this->input->post('stok'),
-            'deskripsi_produk' => $this->input->post('deskripsi'),
-            'gambar_utama' => $namafile_gambar_utama_ubah,
-        );
+        // $data_produk = array(
+        //     'nama_produk' => $this->input->post('nama'),
+        //     'harga_produk' => $this->input->post('harga'),
+        //     'stok_produk' => $this->input->post('stok'),
+        //     'deskripsi_produk' => $this->input->post('deskripsi'),
+        //     'gambar_utama' => $namafile_gambar_utama_ubah,
+        // );
 
-        $this->produkModel->put($id_produk, $data_produk);
+        // $this->produkModel->put($id_produk, $data_produk);
 
-        /*
+        // /*
 
-        boom method yang paling tidak mengasikan
-        merubah multi karegori di dalam database
+        // boom method yang paling tidak mengasikan
+        // merubah multi karegori di dalam database
 
-         */
+        //  */
 
-        if ($this->input->post('kategori')) {
-            foreach ($this->input->post('kategori') as $key => $value) {
-                if (isset($tmp_kategori_last[$key])) {
-                    unset($tmp_kategori_last[$key]);
-                } else {
-                    $this->detailKategoriModel->set([
-                        'id_kategori' => $key,
-                        'id_produk' => $id_produk,
-                    ]);
-                }
-            }
-        }
+        // if ($this->input->post('kategori')) {
+        //     foreach ($this->input->post('kategori') as $key => $value) {
+        //         if (isset($tmp_kategori_last[$key])) {
+        //             unset($tmp_kategori_last[$key]);
+        //         } else {
+        //             $this->detailKategoriModel->set([
+        //                 'id_kategori' => $key,
+        //                 'id_produk' => $id_produk,
+        //             ]);
+        //         }
+        //     }
+        // }
 
-        /*
+        // /*
 
-        method menghapus semua data kategori yang
-        tidak diperlukan dari detail kategori dan produk
+        // method menghapus semua data kategori yang
+        // tidak diperlukan dari detail kategori dan produk
 
-        */
+        // */
 
-        if (isset($tmp_kategori_last)) {
-            foreach ($tmp_kategori_last as $key => $value) {
-                $this->detailKategoriModel->del(false, ['id_produk' => $id_produk, "id_kategori" => $key]);
-            }
-        }
+        // if (isset($tmp_kategori_last)) {
+        //     foreach ($tmp_kategori_last as $key => $value) {
+        //         $this->detailKategoriModel->del(false, ['id_produk' => $id_produk, "id_kategori" => $key]);
+        //     }
+        // }
 
-        /*
+        // /*
 
-        merubah data gambar tambahan produk
-        sangat tricky/rummit jadi perlajari dengan baik
+        // merubah data gambar tambahan produk
+        // sangat tricky/rummit jadi perlajari dengan baik
 
-         */
+        //  */
 
-        foreach ($gambar_tambahan as $key => $value) {
-            if (isset($tmp_pic_last[$key])) {
-                $nmfile = "file_" . time() . $key . ".jpg";
+        // foreach ($gambar_tambahan as $key => $value) {
+        //     if (isset($tmp_pic_last[$key])) {
+        //         $nmfile = "file_" . time() . $key . ".jpg";
 
-                if ($this->upload("./" . $this->path_image, $nmfile, $value)) {
-                    $data_update_image = [
-                        "id_produk" => $id_produk,
-                        "path" => $this->path_image . $nmfile,
-                    ];
+        //         if ($this->upload("./" . $this->path_image, $nmfile, $value)) {
+        //             $data_update_image = [
+        //                 "id_produk" => $id_produk,
+        //                 "path" => $this->path_image . $nmfile,
+        //             ];
 
-                    $this->gambarProdukModel->put($key, $data_update_image);
-                }
-            } else {
-                $nmfile = "file_" . time() . $key . ".jpg";
+        //             $this->gambarProdukModel->put($key, $data_update_image);
+        //         }
+        //     } else {
+        //         $nmfile = "file_" . time() . $key . ".jpg";
 
-                if ($this->upload("./" . $this->path_image, $nmfile, $value)) {
-                    $data_update_image = [
-                        "id_produk" => $id_produk,
-                        "path" => $this->path_image . $nmfile,
-                    ];
+        //         if ($this->upload("./" . $this->path_image, $nmfile, $value)) {
+        //             $data_update_image = [
+        //                 "id_produk" => $id_produk,
+        //                 "path" => $this->path_image . $nmfile,
+        //             ];
 
-                    $this->gambarProdukModel->set($data_update_image);
-                }
-            }
-        }
+        //             $this->gambarProdukModel->set($data_update_image);
+        //         }
+        //     }
+        // }
 
-        if (isset($tmp_pic_last)) {
-            foreach ($tmp_pic_last_tmp as $key => $value) {
-                if (isset($tmp_pic_last[$key]) == false) {
-                    unlink(FCPATH . $value);
-                    $this->gambarProdukModel->del($key);
-                }
-            }
-        }
+        // if (isset($tmp_pic_last)) {
+        //     foreach ($tmp_pic_last_tmp as $key => $value) {
+        //         if (isset($tmp_pic_last[$key]) == false) {
+        //             unlink(FCPATH . $value);
+        //             $this->gambarProdukModel->del($key);
+        //         }
+        //     }
+        // }
 
-        /*
+        // /*
 
-        menyelesaikan langkah change produk dengan complete transaction
+        // menyelesaikan langkah change produk dengan complete transaction
 
-         */
+        //  */
 
-        $this->db->trans_complete();
+        // $this->db->trans_complete();
 
-        if ($this->db->trans_status()) {
-            $this->db->trans_commit();
-            $this->session->set_flashdata('update_produk_success', 'Berhasil menamambahkan data baru');
+        // if ($this->db->trans_status()) {
+        //     $this->db->trans_commit();
+        //     $this->session->set_flashdata('update_produk_success', 'Berhasil menamambahkan data baru');
 
-            redirect('produk');
-        } else {
-            $this->db->trans_rollback();
-            $this->session->set_flashdata('update_produk_failes', 'Tidak berhasil mengubah data baru');
+        //     redirect('admin/produk');
+        // } else {
+        //     $this->db->trans_rollback();
+        //     $this->session->set_flashdata('update_produk_failes', 'Tidak berhasil mengubah data baru');
 
-            redirect('produk/edit/' . $id_produk);
-        }
+        //     redirect('admin/produk/edit/' . $id_produk);
+        // }
     }
 
     public function hapus($id_produk)

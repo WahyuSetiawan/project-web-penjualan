@@ -40,7 +40,7 @@
     <link href="<?php echo base_url('assets/admin') ?>/css/theme.css" rel="stylesheet" media="all">
 
     <!-- data tabel css -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/datatables') ?>/datatables.min.css">
 
     <!-- data tabel -->
 
@@ -163,8 +163,7 @@
     <!-- Main JS-->
     <script src="<?php echo base_url('assets/admin') ?>/js/main.js"></script>
 
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="<?php echo base_url('assets/datatables') ?>/datatables.min.js"></script>
 
     <script>
         $(document).ready(function () {
